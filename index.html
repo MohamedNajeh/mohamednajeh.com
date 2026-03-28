@@ -1,11 +1,55 @@
 <!DOCTYPE html>
-<html class="dark" lang="en">
+<html class="dark" lang="ar" dir="rtl">
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Mohamed Najeh | Senior iOS Engineer</title>
+
+<!-- ── SEO ── -->
+<meta name="description" content="Mohamed Najeh — Senior iOS Engineer with 5+ years building high-performance apps in ride-hailing, healthcare, real estate &amp; e-commerce. Based in Riyadh, available remotely worldwide."/>
+<meta name="keywords" content="iOS Developer, Swift, SwiftUI, UIKit, Senior iOS Engineer, Riyadh, Saudi Arabia, Mobile Developer, مطور iOS, مهندس iOS"/>
+<meta name="author" content="Mohamed Najeh"/>
+<meta name="robots" content="index, follow"/>
+<link rel="canonical" href="https://mohamednajeh.com/"/>
+
+<!-- ── Open Graph ── -->
+<meta property="og:type" content="website"/>
+<meta property="og:url" content="https://mohamednajeh.com/"/>
+<meta property="og:title" content="Mohamed Najeh | Senior iOS Engineer"/>
+<meta property="og:description" content="5+ years crafting high-performance iOS apps — ride-hailing, healthcare, real estate &amp; e-commerce. Clean architecture, real-time systems, fluid UX."/>
+<meta property="og:image" content="https://mohamednajeh.com/profile.jpg"/>
+<meta property="og:locale" content="ar_SA"/>
+<meta property="og:locale:alternate" content="en_US"/>
+<meta property="og:site_name" content="Mohamed Najeh"/>
+
+<!-- ── Twitter Card ── -->
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="Mohamed Najeh | Senior iOS Engineer"/>
+<meta name="twitter:description" content="5+ years crafting high-performance iOS apps — ride-hailing, healthcare, real estate &amp; e-commerce."/>
+<meta name="twitter:image" content="https://mohamednajeh.com/profile.jpg"/>
+
+<!-- ── Structured Data ── -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Mohamed Najeh",
+  "jobTitle": "Senior iOS Engineer",
+  "url": "https://mohamednajeh.com",
+  "email": "mohamed.najeh.ahmed@gmail.com",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Riyadh",
+    "addressCountry": "SA"
+  },
+  "sameAs": [
+    "https://github.com/MohamedNajeh",
+    "https://linkedin.com/in/mohammed-najeh-15b6a0147"
+  ]
+}
+</script>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800;900&family=Space+Grotesk:wght@300;500;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800;900&family=Space+Grotesk:wght@300;500;700&family=Cairo:wght@400;700;800;900&display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
 <script id="tailwind-config">
   tailwind.config = {
@@ -274,6 +318,32 @@
     max-height: 0; overflow: hidden; opacity: 0;
   }
   #mobile-menu.open { max-height: 300px; opacity: 1; }
+
+  /* ── Arabic / RTL ── */
+  [dir="rtl"] body { font-family: 'Cairo', sans-serif; }
+  [dir="rtl"] .nav-link::after { transform-origin: right; }
+  [dir="rtl"] .hero-actions { flex-direction: row-reverse; }
+  [dir="rtl"] .typing-cursor::after { content: '|'; }
+  [dir="rtl"] .reveal.from-left  { transform: translateX(40px); }
+  [dir="rtl"] .reveal.from-right { transform: translateX(-40px); }
+  [dir="rtl"] .border-l-4 { border-left: none; border-right: 4px solid #e6fd45; }
+  [dir="rtl"] .timeline-before { direction: ltr; }
+
+  /* ── Lang toggle button ── */
+  #lang-toggle {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    padding: 5px 12px;
+    border: 1px solid rgba(73,72,71,0.5);
+    border-radius: 6px;
+    color: #adaaaa;
+    background: transparent;
+    cursor: pointer;
+    transition: color 0.2s, border-color 0.2s;
+    font-family: 'Space Grotesk', sans-serif;
+  }
+  #lang-toggle:hover { color: #e6fd45; border-color: #e6fd45; }
 </style>
 </head>
 <body class="bg-background text-on-surface font-body selection:bg-primary selection:text-black overflow-x-hidden">
@@ -285,14 +355,15 @@
       Mohamed<span class="text-primary">.</span>
     </a>
     <div class="hidden md:flex items-center gap-8">
-      <a class="nav-link font-bold tracking-tight text-sm text-on-surface-variant" href="#work">Work</a>
-      <a class="nav-link font-bold tracking-tight text-sm text-on-surface-variant" href="#experience">Experience</a>
-      <a class="nav-link font-bold tracking-tight text-sm text-on-surface-variant" href="#skills">Skills</a>
-      <a class="nav-link font-bold tracking-tight text-sm text-on-surface-variant" href="#contact">Contact</a>
+      <a class="nav-link font-bold tracking-tight text-sm text-on-surface-variant" href="#work" data-i18n="nav-work">أعمالي</a>
+      <a class="nav-link font-bold tracking-tight text-sm text-on-surface-variant" href="#experience" data-i18n="nav-exp">الخبرة</a>
+      <a class="nav-link font-bold tracking-tight text-sm text-on-surface-variant" href="#skills" data-i18n="nav-skills">المهارات</a>
+      <a class="nav-link font-bold tracking-tight text-sm text-on-surface-variant" href="#contact" data-i18n="nav-contact">تواصل</a>
     </div>
     <div class="flex items-center gap-3">
-      <a href="#contact" class="mag-btn bg-primary text-black px-5 py-2 rounded-lg font-bold text-sm shadow-[0_0_20px_rgba(230,253,69,0.2)]">
-        Hire Me
+      <button id="lang-toggle" onclick="toggleLang()" aria-label="Switch language">EN</button>
+      <a href="#contact" class="mag-btn bg-primary text-black px-5 py-2 rounded-lg font-bold text-sm shadow-[0_0_20px_rgba(230,253,69,0.2)]" data-i18n="nav-hire">
+        وظّفني
       </a>
       <button id="menu-toggle" class="md:hidden text-white" aria-label="Menu">
         <span class="material-symbols-outlined">menu</span>
@@ -302,10 +373,10 @@
   <!-- Mobile menu -->
   <div id="mobile-menu" class="md:hidden px-6 pb-4 bg-[#0e0e0e]">
     <div class="flex flex-col gap-4 pt-2 border-t border-white/10">
-      <a href="#work" class="text-on-surface-variant text-sm font-bold hover:text-primary transition-colors">Work</a>
-      <a href="#experience" class="text-on-surface-variant text-sm font-bold hover:text-primary transition-colors">Experience</a>
-      <a href="#skills" class="text-on-surface-variant text-sm font-bold hover:text-primary transition-colors">Skills</a>
-      <a href="#contact" class="text-on-surface-variant text-sm font-bold hover:text-primary transition-colors">Contact</a>
+      <a href="#work" class="text-on-surface-variant text-sm font-bold hover:text-primary transition-colors" data-i18n="nav-work">أعمالي</a>
+      <a href="#experience" class="text-on-surface-variant text-sm font-bold hover:text-primary transition-colors" data-i18n="nav-exp">الخبرة</a>
+      <a href="#skills" class="text-on-surface-variant text-sm font-bold hover:text-primary transition-colors" data-i18n="nav-skills">المهارات</a>
+      <a href="#contact" class="text-on-surface-variant text-sm font-bold hover:text-primary transition-colors" data-i18n="nav-contact">تواصل</a>
     </div>
   </div>
 </nav>
@@ -320,23 +391,22 @@
 
     <!-- LEFT -->
     <div class="flex-1 text-center md:text-left">
-      <span class="hero-eyebrow font-label text-primary tracking-[0.3em] uppercase text-xs mb-6 block">
-        Senior iOS Engineer · Riyadh, Saudi Arabia
+      <span class="hero-eyebrow font-label text-primary tracking-[0.3em] uppercase text-xs mb-6 block" data-i18n="hero-eyebrow">
+        مهندس iOS أول · الرياض، المملكة العربية السعودية
       </span>
       <h1 class="hero-title font-headline font-black text-6xl md:text-8xl lg:text-[96px] tracking-tighter leading-[0.9] mb-8">
         <span class="shimmer-text">Mohamed</span><br/>
         <span class="text-white">Najeh.</span>
       </h1>
-      <p class="hero-desc max-w-xl text-on-surface-variant text-lg md:text-xl leading-relaxed mb-12 mx-auto md:mx-0">
-        5+ years crafting high-performance iOS apps — from ride-hailing and healthcare
-        to real estate and e-commerce. Clean architecture, real-time systems, and fluid UX.
+      <p class="hero-desc max-w-xl text-on-surface-variant text-lg md:text-xl leading-relaxed mb-12 mx-auto md:mx-0" data-i18n="hero-desc">
+        أكثر من 5 سنوات في بناء تطبيقات iOS عالية الأداء — من خدمات توصيل الركاب والرعاية الصحية إلى العقارات والتجارة الإلكترونية. معمارية نظيفة وأنظمة فورية وتجربة مستخدم سلسة.
       </p>
       <div class="hero-actions flex flex-wrap gap-4 justify-center md:justify-start">
         <a href="#work" class="mag-btn primary-gradient text-black font-bold px-8 py-4 rounded-lg shadow-[0_0_30px_rgba(230,253,69,0.18)] inline-flex items-center gap-2">
-          See My Work <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+          <span data-i18n="hero-cta-work">شاهد أعمالي</span> <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
         </a>
-        <a href="#contact" class="mag-btn border border-outline-variant/40 hover:border-primary text-white font-bold px-8 py-4 rounded-lg inline-flex items-center gap-2 transition-colors">
-          Get In Touch
+        <a href="#contact" class="mag-btn border border-outline-variant/40 hover:border-primary text-white font-bold px-8 py-4 rounded-lg inline-flex items-center gap-2 transition-colors" data-i18n="hero-cta-contact">
+          تواصل معي
         </a>
       </div>
     </div>
@@ -365,7 +435,7 @@
         <!-- status badge -->
         <div class="absolute -bottom-3 left-1/2 -translate-x-1/2 flex items-center gap-2 px-4 py-2 bg-surface-container-high rounded-full border border-outline-variant/30 whitespace-nowrap">
           <span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
-          <span class="text-[11px] font-label text-on-surface-variant uppercase tracking-wider">Open to opportunities</span>
+          <span class="text-[11px] font-label text-on-surface-variant uppercase tracking-wider" data-i18n="hero-status">متاح للفرص</span>
         </div>
       </div>
     </div>
@@ -378,19 +448,19 @@
   <div class="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-10 md:gap-8">
     <div class="stat-card reveal reveal-delay-1 rounded-xl p-4">
       <div class="font-headline font-black text-5xl text-primary counter" data-target="15" data-suffix="+">0</div>
-      <div class="font-label text-xs uppercase tracking-widest text-on-surface-variant mt-1">Apps Shipped</div>
+      <div class="font-label text-xs uppercase tracking-widest text-on-surface-variant mt-1" data-i18n="stat-apps">تطبيق منشور</div>
     </div>
     <div class="stat-card reveal reveal-delay-2 rounded-xl p-4">
       <div class="font-headline font-black text-5xl text-primary counter" data-target="5" data-suffix="+">0</div>
-      <div class="font-label text-xs uppercase tracking-widest text-on-surface-variant mt-1">Years Experience</div>
+      <div class="font-label text-xs uppercase tracking-widest text-on-surface-variant mt-1" data-i18n="stat-years">سنوات خبرة</div>
     </div>
     <div class="stat-card reveal reveal-delay-3 rounded-xl p-4">
       <div class="font-headline font-black text-5xl text-primary counter" data-target="15" data-suffix="%">0</div>
-      <div class="font-label text-xs uppercase tracking-widest text-on-surface-variant mt-1">Retention Increase</div>
+      <div class="font-label text-xs uppercase tracking-widest text-on-surface-variant mt-1" data-i18n="stat-retention">زيادة الاحتفاظ</div>
     </div>
     <div class="stat-card reveal reveal-delay-4 rounded-xl p-4">
       <div class="font-headline font-black text-5xl text-primary counter" data-target="40" data-suffix="+">0</div>
-      <div class="font-label text-xs uppercase tracking-widest text-on-surface-variant mt-1">Students Mentored</div>
+      <div class="font-label text-xs uppercase tracking-widest text-on-surface-variant mt-1" data-i18n="stat-students">طالب تدرّب</div>
     </div>
   </div>
 </section>
@@ -398,9 +468,9 @@
 <!-- ── EXPERIENCE TIMELINE ── -->
 <section class="py-32 px-6 md:px-10 max-w-7xl mx-auto" id="experience">
   <div class="reveal">
-    <span class="font-label text-xs text-primary uppercase tracking-widest mb-3 block">Career</span>
+    <span class="font-label text-xs text-primary uppercase tracking-widest mb-3 block" data-i18n="exp-label">المسيرة المهنية</span>
     <h2 class="font-headline font-black text-4xl md:text-5xl mb-20 tracking-tight">
-      Experience <span class="text-primary">.</span>
+      <span data-i18n="exp-title">الخبرة</span> <span class="text-primary">.</span>
     </h2>
   </div>
 
@@ -417,15 +487,15 @@
       </div>
       <div class="w-[calc(100%-4rem)] md:w-[45%] p-7 bg-surface-container-high rounded-xl border border-transparent hover:border-primary/25 transition-all duration-500 hover:shadow-[0_0_30px_rgba(230,253,69,0.05)]">
         <div class="flex items-center justify-between mb-3 flex-wrap gap-2">
-          <time class="font-label text-xs font-bold text-primary">Apr 2022 — Present</time>
-          <span class="bg-primary/10 text-primary border border-primary/20 text-[10px] font-label uppercase tracking-widest px-2 py-1 rounded-sm">Full-Time</span>
+          <time class="font-label text-xs font-bold text-primary" data-i18n="exp-drovox-date">أبريل 2022 — حتى الآن</time>
+          <span class="bg-primary/10 text-primary border border-primary/20 text-[10px] font-label uppercase tracking-widest px-2 py-1 rounded-sm" data-i18n="exp-drovox-type">دوام كامل</span>
         </div>
         <div class="font-headline font-bold text-xl mb-1">Drovox</div>
-        <div class="text-on-surface-variant text-sm mb-4 font-label">Senior iOS Developer</div>
+        <div class="text-on-surface-variant text-sm mb-4 font-label" data-i18n="exp-drovox-role">مطوّر iOS أول</div>
         <ul class="space-y-2 text-on-surface-variant text-sm leading-relaxed">
-          <li class="flex gap-2"><span class="text-primary mt-1 shrink-0">·</span>Revamped Passenger App from MVC → MVVM, boosting modularity and feature scalability</li>
-          <li class="flex gap-2"><span class="text-primary mt-1 shrink-0">·</span>15% increase in user retention and 10% reduction in crash rate</li>
-          <li class="flex gap-2"><span class="text-primary mt-1 shrink-0">·</span>Migrated real-time backend from Firebase → AWS AppSync for live tracking at scale</li>
+          <li class="flex gap-2"><span class="text-primary mt-1 shrink-0">·</span><span data-i18n="exp-drovox-1">إعادة هيكلة تطبيق الراكب من MVC إلى MVVM مما عزّز قابلية التوسع والتعديل</span></li>
+          <li class="flex gap-2"><span class="text-primary mt-1 shrink-0">·</span><span data-i18n="exp-drovox-2">زيادة الاحتفاظ بالمستخدمين 15% وخفض معدل التعطل 10%</span></li>
+          <li class="flex gap-2"><span class="text-primary mt-1 shrink-0">·</span><span data-i18n="exp-drovox-3">الهجرة من Firebase إلى AWS AppSync للتتبع الفوري على نطاق واسع</span></li>
         </ul>
       </div>
     </div>
@@ -437,14 +507,14 @@
       </div>
       <div class="w-[calc(100%-4rem)] md:w-[45%] p-7 bg-surface-container-high rounded-xl border border-transparent hover:border-primary/25 transition-all duration-500 hover:shadow-[0_0_30px_rgba(230,253,69,0.05)]">
         <div class="flex items-center justify-between mb-3 flex-wrap gap-2">
-          <time class="font-label text-xs font-bold text-primary">Dec 2024 — Present</time>
-          <span class="bg-outline-variant/20 text-on-surface-variant border border-outline-variant/30 text-[10px] font-label uppercase tracking-widest px-2 py-1 rounded-sm">Part-Time</span>
+          <time class="font-label text-xs font-bold text-primary" data-i18n="exp-shabek-date">ديسمبر 2024 — حتى الآن</time>
+          <span class="bg-outline-variant/20 text-on-surface-variant border border-outline-variant/30 text-[10px] font-label uppercase tracking-widest px-2 py-1 rounded-sm" data-i18n="exp-shabek-type">دوام جزئي</span>
         </div>
         <div class="font-headline font-bold text-xl mb-1">Shabek</div>
-        <div class="text-on-surface-variant text-sm mb-4 font-label">Senior iOS Engineer</div>
+        <div class="text-on-surface-variant text-sm mb-4 font-label" data-i18n="exp-shabek-role">مهندس iOS أول</div>
         <ul class="space-y-2 text-on-surface-variant text-sm leading-relaxed">
-          <li class="flex gap-2"><span class="text-primary mt-1 shrink-0">·</span>Built Yozya — a real estate app for North Coast properties with 3D property viewing</li>
-          <li class="flex gap-2"><span class="text-primary mt-1 shrink-0">·</span>Integrated service flows: housekeeping, transportation, and booking management</li>
+          <li class="flex gap-2"><span class="text-primary mt-1 shrink-0">·</span><span data-i18n="exp-shabek-1">بناء تطبيق Yozya للعقارات في الساحل الشمالي مع خاصية عرض العقارات ثلاثي الأبعاد</span></li>
+          <li class="flex gap-2"><span class="text-primary mt-1 shrink-0">·</span><span data-i18n="exp-shabek-2">دمج خدمات التنظيف والنقل وإدارة الحجوزات</span></li>
         </ul>
       </div>
     </div>
@@ -456,14 +526,14 @@
       </div>
       <div class="w-[calc(100%-4rem)] md:w-[45%] p-7 bg-surface-container-high rounded-xl border border-transparent hover:border-primary/25 transition-all duration-500 hover:shadow-[0_0_30px_rgba(230,253,69,0.05)]">
         <div class="flex items-center justify-between mb-3 flex-wrap gap-2">
-          <time class="font-label text-xs font-bold text-primary">Jul 2023 — Jul 2024</time>
-          <span class="bg-outline-variant/20 text-on-surface-variant border border-outline-variant/30 text-[10px] font-label uppercase tracking-widest px-2 py-1 rounded-sm">Contract</span>
+          <time class="font-label text-xs font-bold text-primary" data-i18n="exp-atmos-date">يوليو 2023 — يوليو 2024</time>
+          <span class="bg-outline-variant/20 text-on-surface-variant border border-outline-variant/30 text-[10px] font-label uppercase tracking-widest px-2 py-1 rounded-sm" data-i18n="exp-atmos-type">عقد</span>
         </div>
         <div class="font-headline font-bold text-xl mb-1">Atmosphere Software</div>
-        <div class="text-on-surface-variant text-sm mb-4 font-label">iOS Instructor</div>
+        <div class="text-on-surface-variant text-sm mb-4 font-label" data-i18n="exp-atmos-role">مدرّب iOS</div>
         <ul class="space-y-2 text-on-surface-variant text-sm leading-relaxed">
-          <li class="flex gap-2"><span class="text-primary mt-1 shrink-0">·</span>Mentored 40+ students from Swift fundamentals to App Store deployment</li>
-          <li class="flex gap-2"><span class="text-primary mt-1 shrink-0">·</span>Developed course materials, coding challenges, and real-world guided projects</li>
+          <li class="flex gap-2"><span class="text-primary mt-1 shrink-0">·</span><span data-i18n="exp-atmos-1">إرشاد أكثر من 40 طالبًا من أساسيات Swift حتى النشر على App Store</span></li>
+          <li class="flex gap-2"><span class="text-primary mt-1 shrink-0">·</span><span data-i18n="exp-atmos-2">تطوير مواد المنهج والتحديات البرمجية والمشاريع التطبيقية</span></li>
         </ul>
       </div>
     </div>
@@ -475,14 +545,14 @@
       </div>
       <div class="w-[calc(100%-4rem)] md:w-[45%] p-7 bg-surface-container-high rounded-xl border border-transparent hover:border-primary/25 transition-all duration-500 hover:shadow-[0_0_30px_rgba(230,253,69,0.05)]">
         <div class="flex items-center justify-between mb-3 flex-wrap gap-2">
-          <time class="font-label text-xs font-bold text-primary">Nov 2022 — Jul 2023</time>
-          <span class="bg-outline-variant/20 text-on-surface-variant border border-outline-variant/30 text-[10px] font-label uppercase tracking-widest px-2 py-1 rounded-sm">Part-Time</span>
+          <time class="font-label text-xs font-bold text-primary" data-i18n="exp-lnkr-date">نوفمبر 2022 — يوليو 2023</time>
+          <span class="bg-outline-variant/20 text-on-surface-variant border border-outline-variant/30 text-[10px] font-label uppercase tracking-widest px-2 py-1 rounded-sm" data-i18n="exp-lnkr-type">دوام جزئي</span>
         </div>
         <div class="font-headline font-bold text-xl mb-1">Lnkr Technologies</div>
-        <div class="text-on-surface-variant text-sm mb-4 font-label">iOS Developer</div>
+        <div class="text-on-surface-variant text-sm mb-4 font-label" data-i18n="exp-lnkr-role">مطوّر iOS</div>
         <ul class="space-y-2 text-on-surface-variant text-sm leading-relaxed">
-          <li class="flex gap-2"><span class="text-primary mt-1 shrink-0">·</span>Built five healthcare apps: Clinic, Patient, Labs, Pharmacy, and Scans</li>
-          <li class="flex gap-2"><span class="text-primary mt-1 shrink-0">·</span>Integrated NFC medical card scanning for faster patient onboarding</li>
+          <li class="flex gap-2"><span class="text-primary mt-1 shrink-0">·</span><span data-i18n="exp-lnkr-1">بناء خمسة تطبيقات صحية: العيادة، المريض، المختبرات، الصيدلية، والأشعة</span></li>
+          <li class="flex gap-2"><span class="text-primary mt-1 shrink-0">·</span><span data-i18n="exp-lnkr-2">دمج مسح البطاقة الصحية عبر NFC لتسريع تسجيل المرضى</span></li>
         </ul>
       </div>
     </div>
@@ -494,14 +564,14 @@
       </div>
       <div class="w-[calc(100%-4rem)] md:w-[45%] p-7 bg-surface-container-high rounded-xl border border-transparent hover:border-primary/25 transition-all duration-500 hover:shadow-[0_0_30px_rgba(230,253,69,0.05)]">
         <div class="flex items-center justify-between mb-3 flex-wrap gap-2">
-          <time class="font-label text-xs font-bold text-primary">May 2020 — Oct 2020</time>
-          <span class="bg-outline-variant/20 text-on-surface-variant border border-outline-variant/30 text-[10px] font-label uppercase tracking-widest px-2 py-1 rounded-sm">Full-Time</span>
+          <time class="font-label text-xs font-bold text-primary" data-i18n="exp-termno-date">مايو 2020 — أكتوبر 2020</time>
+          <span class="bg-outline-variant/20 text-on-surface-variant border border-outline-variant/30 text-[10px] font-label uppercase tracking-widest px-2 py-1 rounded-sm" data-i18n="exp-termno-type">دوام كامل</span>
         </div>
         <div class="font-headline font-bold text-xl mb-1">Termno</div>
-        <div class="text-on-surface-variant text-sm mb-4 font-label">iOS Developer</div>
+        <div class="text-on-surface-variant text-sm mb-4 font-label" data-i18n="exp-termno-role">مطوّر iOS</div>
         <ul class="space-y-2 text-on-surface-variant text-sm leading-relaxed">
-          <li class="flex gap-2"><span class="text-primary mt-1 shrink-0">·</span>Developed two customized e-commerce apps aligned with client business workflows</li>
-          <li class="flex gap-2"><span class="text-primary mt-1 shrink-0">·</span>Enhanced API integration for product, order, and payment management</li>
+          <li class="flex gap-2"><span class="text-primary mt-1 shrink-0">·</span><span data-i18n="exp-termno-1">تطوير تطبيقَي تجارة إلكترونية مخصّصَين وفق سير عمل العملاء</span></li>
+          <li class="flex gap-2"><span class="text-primary mt-1 shrink-0">·</span><span data-i18n="exp-termno-2">تعزيز تكامل API لإدارة المنتجات والطلبات والمدفوعات</span></li>
         </ul>
       </div>
     </div>
@@ -514,13 +584,13 @@
   <div class="max-w-7xl mx-auto">
     <div class="reveal flex flex-col md:flex-row md:items-end justify-between gap-6 mb-20">
       <div>
-        <span class="font-label text-xs text-primary uppercase tracking-widest mb-3 block">Portfolio</span>
+        <span class="font-label text-xs text-primary uppercase tracking-widest mb-3 block" data-i18n="proj-label">المعرض</span>
         <h2 class="font-headline font-black text-4xl md:text-5xl tracking-tight">
-          App Store Showcase <span class="text-primary">.</span>
+          <span data-i18n="proj-title">معرض التطبيقات</span> <span class="text-primary">.</span>
         </h2>
       </div>
-      <p class="font-label text-xs uppercase tracking-widest text-on-surface-variant max-w-xs">
-        Built for scale, engineered for performance.
+      <p class="font-label text-xs uppercase tracking-widest text-on-surface-variant max-w-xs" data-i18n="proj-subtitle">
+        مبنية للتوسع، مهندَسة للأداء.
       </p>
     </div>
 
@@ -538,9 +608,8 @@
             <span class="bg-surface-container-highest/90 backdrop-blur px-3 py-1 rounded-sm text-[10px] font-label uppercase tracking-widest text-on-surface-variant">Real Estate</span>
           </div>
           <h3 class="font-headline font-black text-3xl mb-2">YOZYA</h3>
-          <p class="text-on-surface-variant max-w-md text-sm leading-relaxed">
-            Real estate platform for North Coast properties — 3D property viewing, housekeeping,
-            and transportation service integration built with SwiftUI & UIKit.
+          <p class="text-on-surface-variant max-w-md text-sm leading-relaxed" data-i18n="proj-yozya-desc">
+            منصة عقارية للساحل الشمالي — عرض ثلاثي الأبعاد، خدمة تنظيف ونقل مدمجة، مبنية بـ SwiftUI و UIKit.
           </p>
         </div>
         <div class="absolute top-6 right-6 w-10 h-10 bg-primary/10 border border-primary/20 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
@@ -557,8 +626,8 @@
         <div class="project-content absolute bottom-0 p-7">
           <span class="bg-surface-container-highest/90 backdrop-blur px-3 py-1 rounded-sm text-[10px] font-label uppercase tracking-widest text-primary mb-4 inline-block">Swift · AWS AppSync</span>
           <h3 class="font-headline font-bold text-2xl mb-2">Drovox Ecosystem</h3>
-          <p class="text-on-surface-variant text-sm leading-relaxed">
-            Ride-hailing suite — Passenger, Merchant & Hero apps with real-time live tracking and payments.
+          <p class="text-on-surface-variant text-sm leading-relaxed" data-i18n="proj-drovox-desc">
+            منظومة نقل ركاب — تطبيقات الراكب والتاجر والسائق مع تتبع فوري ومدفوعات.
           </p>
         </div>
       </div>
@@ -572,8 +641,8 @@
         <div class="project-content absolute bottom-0 p-7">
           <span class="bg-surface-container-highest/90 backdrop-blur px-3 py-1 rounded-sm text-[10px] font-label uppercase tracking-widest text-primary mb-4 inline-block">Swift · NFC · REST</span>
           <h3 class="font-headline font-bold text-2xl mb-2">Lnkr Healthcare Suite</h3>
-          <p class="text-on-surface-variant text-sm leading-relaxed">
-            5 healthcare apps — Clinic, Patient, Labs, Pharmacy & Scans — with NFC medical card scanning.
+          <p class="text-on-surface-variant text-sm leading-relaxed" data-i18n="proj-lnkr-desc">
+            5 تطبيقات صحية — عيادة، مريض، مختبرات، صيدلية وأشعة — مع مسح البطاقة الصحية NFC.
           </p>
         </div>
       </div>
@@ -586,8 +655,8 @@
                alt="Atmodrive"/>
           <div class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent"></div>
           <div class="project-content absolute bottom-0 p-5">
-            <h3 class="font-headline font-bold text-lg mb-1">Atmodrive Driver</h3>
-            <p class="text-on-surface-variant text-xs leading-relaxed">Real-time navigation, trip & earnings management.</p>
+            <h3 class="font-headline font-bold text-lg mb-1" data-i18n="proj-atmodrive-title">سائق Atmodrive</h3>
+            <p class="text-on-surface-variant text-xs leading-relaxed" data-i18n="proj-atmodrive-desc">ملاحة فورية وإدارة الرحلات والأرباح.</p>
           </div>
         </div>
         <div class="project-card-wrap group relative overflow-hidden bg-surface-container rounded-xl min-h-[180px] cursor-pointer">
@@ -597,7 +666,7 @@
           <div class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent"></div>
           <div class="project-content absolute bottom-0 p-5">
             <h3 class="font-headline font-bold text-lg mb-1">Haftaa</h3>
-            <p class="text-on-surface-variant text-xs leading-relaxed">Feature-rich marketplace with order & payment flows.</p>
+            <p class="text-on-surface-variant text-xs leading-relaxed" data-i18n="proj-haftaa-desc">سوق متكامل بتدفقات طلب ودفع متقدمة.</p>
           </div>
         </div>
       </div>
@@ -611,18 +680,17 @@
   <div class="grid grid-cols-1 lg:grid-cols-12 gap-16">
 
     <div class="lg:col-span-4 reveal">
-      <span class="font-label text-xs text-primary uppercase tracking-widest mb-3 block">Toolkit</span>
+      <span class="font-label text-xs text-primary uppercase tracking-widest mb-3 block" data-i18n="skills-label">الأدوات</span>
       <h2 class="font-headline font-black text-4xl md:text-5xl mb-6 tracking-tight">
-        Tech Stack <span class="text-primary">.</span>
+        <span data-i18n="skills-title">التقنيات</span> <span class="text-primary">.</span>
       </h2>
-      <p class="text-on-surface-variant mb-8 leading-relaxed">
-        A specialized toolkit refined over 15+ production apps, optimized for
-        performance, maintainability, and clean architecture.
+      <p class="text-on-surface-variant mb-8 leading-relaxed" data-i18n="skills-desc">
+        منظومة أدوات متخصصة صُقِلت عبر أكثر من 15 تطبيقًا في الإنتاج، محسّنة للأداء وقابلية الصيانة والمعمارية النظيفة.
       </p>
       <div class="p-6 bg-surface-container-low rounded-xl border-l-4 border-primary">
-        <p class="text-xs font-label text-primary uppercase tracking-widest mb-2">🏆 Award</p>
-        <p class="text-on-surface-variant text-sm leading-relaxed">
-          1st Place — Ebdaa Competition for graduation project excellence.
+        <p class="text-xs font-label text-primary uppercase tracking-widest mb-2" data-i18n="skills-award-label">🏆 جائزة</p>
+        <p class="text-on-surface-variant text-sm leading-relaxed" data-i18n="skills-award-desc">
+          المركز الأول — مسابقة إبداع لتميز مشاريع التخرج.
         </p>
       </div>
     </div>
@@ -631,7 +699,7 @@
 
       <div class="reveal reveal-delay-1 space-y-4">
         <h3 class="font-headline font-bold text-base flex items-center gap-2">
-          <span class="material-symbols-outlined text-primary">smartphone</span> iOS Core
+          <span class="material-symbols-outlined text-primary">smartphone</span> <span data-i18n="skills-ios">iOS الأساسية</span>
         </h3>
         <div class="flex flex-wrap gap-2">
           <span class="skill-tag bg-surface-container-highest px-4 py-2 rounded-lg font-label text-xs text-on-surface-variant border border-transparent">Swift</span>
@@ -644,7 +712,7 @@
 
       <div class="reveal reveal-delay-2 space-y-4">
         <h3 class="font-headline font-bold text-base flex items-center gap-2">
-          <span class="material-symbols-outlined text-primary">architecture</span> Architecture
+          <span class="material-symbols-outlined text-primary">architecture</span> <span data-i18n="skills-arch">العمارة البرمجية</span>
         </h3>
         <div class="flex flex-wrap gap-2">
           <span class="skill-tag bg-surface-container-highest px-4 py-2 rounded-lg font-label text-xs text-on-surface-variant border border-transparent">MVVM</span>
@@ -656,7 +724,7 @@
 
       <div class="reveal reveal-delay-3 space-y-4">
         <h3 class="font-headline font-bold text-base flex items-center gap-2">
-          <span class="material-symbols-outlined text-primary">cloud</span> Backend & APIs
+          <span class="material-symbols-outlined text-primary">cloud</span> <span data-i18n="skills-backend">الخادم والـ APIs</span>
         </h3>
         <div class="flex flex-wrap gap-2">
           <span class="skill-tag bg-surface-container-highest px-4 py-2 rounded-lg font-label text-xs text-on-surface-variant border border-transparent">Firebase</span>
@@ -669,7 +737,7 @@
 
       <div class="reveal reveal-delay-4 space-y-4">
         <h3 class="font-headline font-bold text-base flex items-center gap-2">
-          <span class="material-symbols-outlined text-primary">map</span> Maps & Tools
+          <span class="material-symbols-outlined text-primary">map</span> <span data-i18n="skills-maps">الخرائط والأدوات</span>
         </h3>
         <div class="flex flex-wrap gap-2">
           <span class="skill-tag bg-surface-container-highest px-4 py-2 rounded-lg font-label text-xs text-on-surface-variant border border-transparent">MapKit</span>
@@ -688,18 +756,17 @@
 <section class="py-32 px-6 md:px-10 bg-surface-container-low border-t border-white/5" id="contact">
   <div class="max-w-7xl mx-auto">
     <div class="reveal mb-16">
-      <span class="font-label text-xs text-primary uppercase tracking-widest mb-3 block">Get In Touch</span>
+      <span class="font-label text-xs text-primary uppercase tracking-widest mb-3 block" data-i18n="contact-label">تواصل معي</span>
       <h2 class="font-headline font-black text-4xl md:text-5xl tracking-tight">
-        Let's Work Together <span class="text-primary">.</span>
+        <span data-i18n="contact-title">لنعمل معاً</span> <span class="text-primary">.</span>
       </h2>
     </div>
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
 
       <!-- Left -->
       <div class="reveal space-y-6">
-        <p class="text-on-surface-variant text-lg leading-relaxed">
-          Open to senior iOS engineering roles, freelance projects, and long-term partnerships.
-          Based in <span class="text-white font-bold">Riyadh</span> — available remotely worldwide.
+        <p class="text-on-surface-variant text-lg leading-relaxed" data-i18n-html="contact-desc">
+          متاح لوظائف هندسة iOS الأولى، المشاريع المستقلة، والشراكات طويلة الأمد. مقيم في <span class="text-white font-bold">الرياض</span> — متاح عن بُعد في جميع أنحاء العالم.
         </p>
         <div class="space-y-4">
           <a href="mailto:mohamed.najeh.ahmed@gmail.com"
@@ -711,11 +778,11 @@
         <div class="flex flex-wrap gap-3 pt-4">
           <a href="https://github.com/MohamedNajeh" target="_blank"
              class="mag-btn flex items-center gap-2 px-5 py-3 border border-outline-variant/40 hover:border-primary text-on-surface-variant hover:text-primary rounded-lg text-sm font-bold transition-all">
-            <span class="material-symbols-outlined text-[18px]">code</span> GitHub
+            <span class="material-symbols-outlined text-[18px]">code</span> <span data-i18n="contact-github">GitHub</span>
           </a>
           <a href="https://linkedin.com/in/mohammed-najeh-15b6a0147" target="_blank"
              class="mag-btn flex items-center gap-2 px-5 py-3 border border-outline-variant/40 hover:border-primary text-on-surface-variant hover:text-primary rounded-lg text-sm font-bold transition-all">
-            <span class="material-symbols-outlined text-[18px]">work</span> LinkedIn
+            <span class="material-symbols-outlined text-[18px]">work</span> <span data-i18n="contact-linkedin">LinkedIn</span>
           </a>
         </div>
       </div>
@@ -724,27 +791,27 @@
       <form class="reveal reveal-delay-2 space-y-4" onsubmit="handleSubmit(event)">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
-            <label class="font-label text-[10px] uppercase tracking-widest text-on-surface-variant mb-2 block">Name</label>
-            <input type="text" placeholder="Your name" class="contact-input" required/>
+            <label class="font-label text-[10px] uppercase tracking-widest text-on-surface-variant mb-2 block" data-i18n="contact-name">الاسم</label>
+            <input type="text" data-i18n-placeholder="contact-name-ph" placeholder="اسمك الكريم" class="contact-input" required/>
           </div>
           <div>
-            <label class="font-label text-[10px] uppercase tracking-widest text-on-surface-variant mb-2 block">Email</label>
-            <input type="email" placeholder="your@email.com" class="contact-input" required/>
+            <label class="font-label text-[10px] uppercase tracking-widest text-on-surface-variant mb-2 block" data-i18n="contact-email">البريد الإلكتروني</label>
+            <input type="email" data-i18n-placeholder="contact-email-ph" placeholder="بريدك@الإلكتروني.com" class="contact-input" required/>
           </div>
         </div>
         <div>
-          <label class="font-label text-[10px] uppercase tracking-widest text-on-surface-variant mb-2 block">Subject</label>
-          <input type="text" placeholder="Project inquiry / Job opportunity" class="contact-input"/>
+          <label class="font-label text-[10px] uppercase tracking-widest text-on-surface-variant mb-2 block" data-i18n="contact-subject">الموضوع</label>
+          <input type="text" data-i18n-placeholder="contact-subject-ph" placeholder="استفسار مشروع / فرصة عمل" class="contact-input"/>
         </div>
         <div>
-          <label class="font-label text-[10px] uppercase tracking-widest text-on-surface-variant mb-2 block">Message</label>
-          <textarea rows="5" placeholder="Tell me about your project..." class="contact-input resize-none"></textarea>
+          <label class="font-label text-[10px] uppercase tracking-widest text-on-surface-variant mb-2 block" data-i18n="contact-message">الرسالة</label>
+          <textarea rows="5" data-i18n-placeholder="contact-msg-ph" placeholder="أخبرني عن مشروعك..." class="contact-input resize-none"></textarea>
         </div>
         <button type="submit"
                 class="mag-btn w-full primary-gradient text-black font-bold py-4 rounded-lg text-sm shadow-[0_0_30px_rgba(230,253,69,0.15)] flex items-center justify-center gap-2">
-          Send Message <span class="material-symbols-outlined text-[18px]">send</span>
+          <span data-i18n="contact-send">إرسال الرسالة</span> <span class="material-symbols-outlined text-[18px]">send</span>
         </button>
-        <p id="form-success" class="text-primary text-sm text-center hidden">✓ Message sent! I'll get back to you soon.</p>
+        <p id="form-success" class="text-primary text-sm text-center hidden" data-i18n="contact-success">✓ تم الإرسال! سأرد عليك قريبًا.</p>
       </form>
 
     </div>
@@ -758,8 +825,8 @@
       <div class="text-lg font-black text-white tracking-tighter mb-1">
         Mohamed<span class="text-primary">.</span>
       </div>
-      <div class="font-label text-xs uppercase tracking-widest text-on-surface-variant">
-        Senior iOS Engineer · mohamednajeh.com
+      <div class="font-label text-xs uppercase tracking-widest text-on-surface-variant" data-i18n="footer-role">
+        مهندس iOS أول · mohamednajeh.com
       </div>
     </div>
     <div class="flex gap-6 justify-center">
@@ -772,11 +839,11 @@
     </div>
     <div class="flex items-center gap-2 px-4 py-2 rounded-full bg-surface-container-high border border-outline-variant/20">
       <span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
-      <span class="text-[10px] font-label text-on-surface-variant tracking-wider uppercase">Available for hire</span>
+      <span class="text-[10px] font-label text-on-surface-variant tracking-wider uppercase" data-i18n="footer-available">متاح للتوظيف</span>
     </div>
   </div>
   <div class="max-w-7xl mx-auto mt-8 pt-6 border-t border-white/5 text-center">
-    <p class="font-label text-xs text-on-surface-variant/50">© 2026 Mohamed Najeh. All rights reserved.</p>
+    <p class="font-label text-xs text-on-surface-variant/50" data-i18n="footer-copyright">© 2026 محمد ناجح. جميع الحقوق محفوظة.</p>
   </div>
 </footer>
 
@@ -927,6 +994,156 @@ const nav = document.querySelector('nav');
 window.addEventListener('scroll', () => {
   nav.style.padding = window.scrollY > 60 ? '12px 0' : '';
 }, { passive: true });
+
+// ── 10. i18n Language Toggle ──
+const translations = {
+  en: {
+    'nav-work': 'Work', 'nav-exp': 'Experience', 'nav-skills': 'Skills',
+    'nav-contact': 'Contact', 'nav-hire': 'Hire Me',
+    'hero-eyebrow': 'Senior iOS Engineer · Riyadh, Saudi Arabia',
+    'hero-desc': '5+ years crafting high-performance iOS apps — from ride-hailing and healthcare to real estate and e-commerce. Clean architecture, real-time systems, and fluid UX.',
+    'hero-cta-work': 'See My Work', 'hero-cta-contact': 'Get In Touch', 'hero-status': 'Open to opportunities',
+    'stat-apps': 'Apps Shipped', 'stat-years': 'Years Experience', 'stat-retention': 'Retention Increase', 'stat-students': 'Students Mentored',
+    'exp-label': 'Career', 'exp-title': 'Experience',
+    'exp-drovox-date': 'Apr 2022 — Present', 'exp-drovox-type': 'Full-Time', 'exp-drovox-role': 'Senior iOS Developer',
+    'exp-drovox-1': 'Revamped Passenger App from MVC → MVVM, boosting modularity and feature scalability',
+    'exp-drovox-2': '15% increase in user retention and 10% reduction in crash rate',
+    'exp-drovox-3': 'Migrated real-time backend from Firebase → AWS AppSync for live tracking at scale',
+    'exp-shabek-date': 'Dec 2024 — Present', 'exp-shabek-type': 'Part-Time', 'exp-shabek-role': 'Senior iOS Engineer',
+    'exp-shabek-1': 'Built Yozya — a real estate app for North Coast properties with 3D property viewing',
+    'exp-shabek-2': 'Integrated service flows: housekeeping, transportation, and booking management',
+    'exp-atmos-date': 'Jul 2023 — Jul 2024', 'exp-atmos-type': 'Contract', 'exp-atmos-role': 'iOS Instructor',
+    'exp-atmos-1': 'Mentored 40+ students from Swift fundamentals to App Store deployment',
+    'exp-atmos-2': 'Developed course materials, coding challenges, and real-world guided projects',
+    'exp-lnkr-date': 'Nov 2022 — Jul 2023', 'exp-lnkr-type': 'Part-Time', 'exp-lnkr-role': 'iOS Developer',
+    'exp-lnkr-1': 'Built five healthcare apps: Clinic, Patient, Labs, Pharmacy, and Scans',
+    'exp-lnkr-2': 'Integrated NFC medical card scanning for faster patient onboarding',
+    'exp-termno-date': 'May 2020 — Oct 2020', 'exp-termno-type': 'Full-Time', 'exp-termno-role': 'iOS Developer',
+    'exp-termno-1': 'Developed two customized e-commerce apps aligned with client business workflows',
+    'exp-termno-2': 'Enhanced API integration for product, order, and payment management',
+    'proj-label': 'Portfolio', 'proj-title': 'App Store Showcase', 'proj-subtitle': 'Built for scale, engineered for performance.',
+    'proj-yozya-desc': 'Real estate platform for North Coast properties — 3D property viewing, housekeeping, and transportation service integration built with SwiftUI & UIKit.',
+    'proj-drovox-desc': 'Ride-hailing suite — Passenger, Merchant & Hero apps with real-time live tracking and payments.',
+    'proj-lnkr-desc': '5 healthcare apps — Clinic, Patient, Labs, Pharmacy & Scans — with NFC medical card scanning.',
+    'proj-atmodrive-title': 'Atmodrive Driver', 'proj-atmodrive-desc': 'Real-time navigation, trip & earnings management.',
+    'proj-haftaa-desc': 'Feature-rich marketplace with order & payment flows.',
+    'skills-label': 'Toolkit', 'skills-title': 'Tech Stack',
+    'skills-desc': 'A specialized toolkit refined over 15+ production apps, optimized for performance, maintainability, and clean architecture.',
+    'skills-award-label': '🏆 Award', 'skills-award-desc': '1st Place — Ebdaa Competition for graduation project excellence.',
+    'skills-ios': 'iOS Core', 'skills-arch': 'Architecture', 'skills-backend': 'Backend & APIs', 'skills-maps': 'Maps & Tools',
+    'contact-label': 'Get In Touch', 'contact-title': "Let's Work Together",
+    'contact-desc': 'Open to senior iOS engineering roles, freelance projects, and long-term partnerships. Based in <span class="text-white font-bold">Riyadh</span> — available remotely worldwide.',
+    'contact-github': 'GitHub', 'contact-linkedin': 'LinkedIn',
+    'contact-name': 'Name', 'contact-email': 'Email', 'contact-subject': 'Subject', 'contact-message': 'Message',
+    'contact-name-ph': 'Your name', 'contact-email-ph': 'your@email.com',
+    'contact-subject-ph': 'Project inquiry / Job opportunity', 'contact-msg-ph': 'Tell me about your project...',
+    'contact-send': 'Send Message', 'contact-success': "✓ Message sent! I'll get back to you soon.",
+    'footer-role': 'Senior iOS Engineer · mohamednajeh.com',
+    'footer-available': 'Available for hire',
+    'footer-copyright': '© 2026 Mohamed Najeh. All rights reserved.',
+  },
+  ar: {
+    'nav-work': 'أعمالي', 'nav-exp': 'الخبرة', 'nav-skills': 'المهارات',
+    'nav-contact': 'تواصل', 'nav-hire': 'وظّفني',
+    'hero-eyebrow': 'مهندس iOS أول · الرياض، المملكة العربية السعودية',
+    'hero-desc': 'أكثر من 5 سنوات في بناء تطبيقات iOS عالية الأداء — من خدمات توصيل الركاب والرعاية الصحية إلى العقارات والتجارة الإلكترونية. معمارية نظيفة وأنظمة فورية وتجربة مستخدم سلسة.',
+    'hero-cta-work': 'شاهد أعمالي', 'hero-cta-contact': 'تواصل معي', 'hero-status': 'متاح للفرص',
+    'stat-apps': 'تطبيق منشور', 'stat-years': 'سنوات خبرة', 'stat-retention': 'زيادة الاحتفاظ', 'stat-students': 'طالب تدرّب',
+    'exp-label': 'المسيرة المهنية', 'exp-title': 'الخبرة',
+    'exp-drovox-date': 'أبريل 2022 — حتى الآن', 'exp-drovox-type': 'دوام كامل', 'exp-drovox-role': 'مطوّر iOS أول',
+    'exp-drovox-1': 'إعادة هيكلة تطبيق الراكب من MVC إلى MVVM مما عزّز قابلية التوسع والتعديل',
+    'exp-drovox-2': 'زيادة الاحتفاظ بالمستخدمين 15% وخفض معدل التعطل 10%',
+    'exp-drovox-3': 'الهجرة من Firebase إلى AWS AppSync للتتبع الفوري على نطاق واسع',
+    'exp-shabek-date': 'ديسمبر 2024 — حتى الآن', 'exp-shabek-type': 'دوام جزئي', 'exp-shabek-role': 'مهندس iOS أول',
+    'exp-shabek-1': 'بناء تطبيق Yozya للعقارات في الساحل الشمالي مع خاصية عرض العقارات ثلاثي الأبعاد',
+    'exp-shabek-2': 'دمج خدمات التنظيف والنقل وإدارة الحجوزات',
+    'exp-atmos-date': 'يوليو 2023 — يوليو 2024', 'exp-atmos-type': 'عقد', 'exp-atmos-role': 'مدرّب iOS',
+    'exp-atmos-1': 'إرشاد أكثر من 40 طالبًا من أساسيات Swift حتى النشر على App Store',
+    'exp-atmos-2': 'تطوير مواد المنهج والتحديات البرمجية والمشاريع التطبيقية',
+    'exp-lnkr-date': 'نوفمبر 2022 — يوليو 2023', 'exp-lnkr-type': 'دوام جزئي', 'exp-lnkr-role': 'مطوّر iOS',
+    'exp-lnkr-1': 'بناء خمسة تطبيقات صحية: العيادة، المريض، المختبرات، الصيدلية، والأشعة',
+    'exp-lnkr-2': 'دمج مسح البطاقة الصحية عبر NFC لتسريع تسجيل المرضى',
+    'exp-termno-date': 'مايو 2020 — أكتوبر 2020', 'exp-termno-type': 'دوام كامل', 'exp-termno-role': 'مطوّر iOS',
+    'exp-termno-1': 'تطوير تطبيقَي تجارة إلكترونية مخصّصَين وفق سير عمل العملاء',
+    'exp-termno-2': 'تعزيز تكامل API لإدارة المنتجات والطلبات والمدفوعات',
+    'proj-label': 'المعرض', 'proj-title': 'معرض التطبيقات', 'proj-subtitle': 'مبنية للتوسع، مهندَسة للأداء.',
+    'proj-yozya-desc': 'منصة عقارية للساحل الشمالي — عرض ثلاثي الأبعاد، خدمة تنظيف ونقل مدمجة، مبنية بـ SwiftUI و UIKit.',
+    'proj-drovox-desc': 'منظومة نقل ركاب — تطبيقات الراكب والتاجر والسائق مع تتبع فوري ومدفوعات.',
+    'proj-lnkr-desc': '5 تطبيقات صحية — عيادة، مريض، مختبرات، صيدلية وأشعة — مع مسح البطاقة الصحية NFC.',
+    'proj-atmodrive-title': 'سائق Atmodrive', 'proj-atmodrive-desc': 'ملاحة فورية وإدارة الرحلات والأرباح.',
+    'proj-haftaa-desc': 'سوق متكامل بتدفقات طلب ودفع متقدمة.',
+    'skills-label': 'الأدوات', 'skills-title': 'التقنيات',
+    'skills-desc': 'منظومة أدوات متخصصة صُقِلت عبر أكثر من 15 تطبيقًا في الإنتاج، محسّنة للأداء وقابلية الصيانة والمعمارية النظيفة.',
+    'skills-award-label': '🏆 جائزة', 'skills-award-desc': 'المركز الأول — مسابقة إبداع لتميز مشاريع التخرج.',
+    'skills-ios': 'iOS الأساسية', 'skills-arch': 'العمارة البرمجية', 'skills-backend': 'الخادم والـ APIs', 'skills-maps': 'الخرائط والأدوات',
+    'contact-label': 'تواصل معي', 'contact-title': 'لنعمل معاً',
+    'contact-desc': 'متاح لوظائف هندسة iOS الأولى، المشاريع المستقلة، والشراكات طويلة الأمد. مقيم في <span class="text-white font-bold">الرياض</span> — متاح عن بُعد في جميع أنحاء العالم.',
+    'contact-github': 'GitHub', 'contact-linkedin': 'LinkedIn',
+    'contact-name': 'الاسم', 'contact-email': 'البريد الإلكتروني', 'contact-subject': 'الموضوع', 'contact-message': 'الرسالة',
+    'contact-name-ph': 'اسمك الكريم', 'contact-email-ph': 'بريدك@الإلكتروني.com',
+    'contact-subject-ph': 'استفسار مشروع / فرصة عمل', 'contact-msg-ph': 'أخبرني عن مشروعك...',
+    'contact-send': 'إرسال الرسالة', 'contact-success': '✓ تم الإرسال! سأرد عليك قريبًا.',
+    'footer-role': 'مهندس iOS أول · mohamednajeh.com',
+    'footer-available': 'متاح للتوظيف',
+    'footer-copyright': '© 2026 محمد ناجح. جميع الحقوق محفوظة.',
+  }
+};
+
+let currentLang = localStorage.getItem('lang') || 'ar';
+
+function applyLang(lang) {
+  const t = translations[lang];
+  const html = document.documentElement;
+
+  // Update html attributes
+  html.setAttribute('lang', lang);
+  html.setAttribute('dir', lang === 'ar' ? 'rtl' : 'ltr');
+
+  // Update textContent elements
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (t[key] !== undefined) el.textContent = t[key];
+  });
+
+  // Update innerHTML elements (for HTML content like contact-desc)
+  document.querySelectorAll('[data-i18n-html]').forEach(el => {
+    const key = el.getAttribute('data-i18n-html');
+    if (t[key] !== undefined) el.innerHTML = t[key];
+  });
+
+  // Update placeholder attributes
+  document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+    const key = el.getAttribute('data-i18n-placeholder');
+    if (t[key] !== undefined) el.setAttribute('placeholder', t[key]);
+  });
+
+  // Update toggle button label
+  const toggleBtn = document.getElementById('lang-toggle');
+  if (toggleBtn) toggleBtn.textContent = lang === 'ar' ? 'EN' : 'عربي';
+
+  // Update document title
+  document.title = lang === 'ar'
+    ? 'محمد ناجح | مهندس iOS أول'
+    : 'Mohamed Najeh | Senior iOS Engineer';
+
+  // Update meta description
+  const metaDesc = document.querySelector('meta[name="description"]');
+  if (metaDesc) {
+    metaDesc.content = lang === 'ar'
+      ? 'محمد ناجح — مهندس iOS أول بخبرة أكثر من 5 سنوات في بناء تطبيقات عالية الأداء. مقيم في الرياض، متاح عن بُعد.'
+      : 'Mohamed Najeh — Senior iOS Engineer with 5+ years building high-performance apps in ride-hailing, healthcare, real estate & e-commerce. Based in Riyadh, available remotely worldwide.';
+  }
+
+  localStorage.setItem('lang', lang);
+  currentLang = lang;
+}
+
+function toggleLang() {
+  applyLang(currentLang === 'ar' ? 'en' : 'ar');
+}
+
+// Apply on page load
+applyLang(currentLang);
 </script>
 
 </body>
