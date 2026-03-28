@@ -1,0 +1,933 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Mohamed Najeh | Senior iOS Engineer</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800;900&family=Space+Grotesk:wght@300;500;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        colors: {
+          "error": "#ff7351",
+          "on-primary": "#556000",
+          "surface-container": "#1a1919",
+          "primary-fixed": "#e1f73f",
+          "tertiary-container": "#fdd33a",
+          "secondary": "#f7e54e",
+          "surface-container-high": "#201f1f",
+          "surface-variant": "#262626",
+          "surface-bright": "#2c2c2c",
+          "surface-container-low": "#131313",
+          "outline": "#777575",
+          "on-surface": "#ffffff",
+          "background": "#0e0e0e",
+          "on-surface-variant": "#adaaaa",
+          "surface": "#0e0e0e",
+          "outline-variant": "#494847",
+          "primary": "#e6fd45",
+          "surface-container-highest": "#262626",
+          "surface-dim": "#0e0e0e",
+          "surface-container-lowest": "#000000",
+          "inverse-on-surface": "#565554",
+        },
+        fontFamily: {
+          "headline": ["Inter"],
+          "body": ["Inter"],
+          "label": ["Space Grotesk"]
+        },
+        borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+      },
+    },
+  }
+</script>
+<style>
+  /* ── Custom Keyframe Animations ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(36px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    50%       { transform: translateY(-14px) rotate(0.5deg); }
+  }
+  @keyframes slideLeft {
+    from { opacity: 0; transform: translateX(-50px); }
+    to   { opacity: 1; transform: translateX(0); }
+  }
+  @keyframes slideRight {
+    from { opacity: 0; transform: translateX(50px); }
+    to   { opacity: 1; transform: translateX(0); }
+  }
+  @keyframes glowBreath {
+    0%, 100% { box-shadow: 0 0 30px rgba(230,253,69,0.08); }
+    50%       { box-shadow: 0 0 70px rgba(230,253,69,0.22); }
+  }
+  @keyframes borderSpin {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
+  }
+  @keyframes scanLine {
+    0%   { top: 0%; }
+    100% { top: 100%; }
+  }
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50%       { opacity: 0; }
+  }
+  @keyframes scaleIn {
+    from { opacity: 0; transform: scale(0.85); }
+    to   { opacity: 1; transform: scale(1); }
+  }
+  @keyframes shimmer {
+    from { background-position: -200% center; }
+    to   { background-position: 200% center; }
+  }
+  @keyframes tagPop {
+    0%   { opacity: 0; transform: scale(0.7) translateY(10px); }
+    70%  { transform: scale(1.05) translateY(-2px); }
+    100% { opacity: 1; transform: scale(1) translateY(0); }
+  }
+  @keyframes timelineDot {
+    from { opacity: 0; transform: scale(0); }
+    to   { opacity: 1; transform: scale(1); }
+  }
+  @keyframes progressFill {
+    from { width: 0%; }
+    to   { width: var(--target-width); }
+  }
+
+  /* ── Scroll Reveal System ── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(32px);
+    transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .reveal.from-left  { transform: translateX(-40px); }
+  .reveal.from-right { transform: translateX(40px); }
+  .reveal.scale-up   { transform: scale(0.9); opacity: 0; }
+  .reveal.visible {
+    opacity: 1 !important;
+    transform: translate(0) scale(1) !important;
+  }
+  .reveal-delay-1 { transition-delay: 0.08s; }
+  .reveal-delay-2 { transition-delay: 0.16s; }
+  .reveal-delay-3 { transition-delay: 0.24s; }
+  .reveal-delay-4 { transition-delay: 0.32s; }
+  .reveal-delay-5 { transition-delay: 0.40s; }
+  .reveal-delay-6 { transition-delay: 0.48s; }
+
+  /* ── Hero Load Animations ── */
+  .hero-eyebrow   { animation: fadeUp 0.8s cubic-bezier(0.16,1,0.3,1) 0.2s both; }
+  .hero-title     { animation: fadeUp 0.9s cubic-bezier(0.16,1,0.3,1) 0.35s both; }
+  .hero-desc      { animation: fadeUp 0.9s cubic-bezier(0.16,1,0.3,1) 0.5s both; }
+  .hero-actions   { animation: fadeUp 0.9s cubic-bezier(0.16,1,0.3,1) 0.65s both; }
+  .hero-photo-col { animation: fadeIn 1.1s ease 0.4s both; }
+
+  /* ── Profile Image Float ── */
+  .profile-float {
+    animation: float 5s ease-in-out infinite;
+  }
+  .profile-glow {
+    animation: glowBreath 4s ease-in-out infinite;
+  }
+
+  /* ── Shimmer gradient text ── */
+  .shimmer-text {
+    background: linear-gradient(90deg,
+      #e6fd45 0%, #ffffff 40%, #e6fd45 60%, #b9cf06 100%);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: shimmer 4s linear infinite;
+  }
+
+  /* ── Typing cursor ── */
+  .typing-cursor::after {
+    content: '|';
+    color: #e6fd45;
+    animation: blink 0.8s step-end infinite;
+  }
+
+  /* ── Stat card ── */
+  .stat-card {
+    transition: transform 0.3s ease, background 0.3s ease;
+  }
+  .stat-card:hover {
+    transform: translateY(-4px);
+    background: rgba(230,253,69,0.04);
+  }
+
+  /* ── Project card overlay ── */
+  .project-content {
+    transition: transform 0.5s cubic-bezier(0.16,1,0.3,1);
+  }
+  .project-card-wrap:hover .project-content {
+    transform: translateY(-6px);
+  }
+
+  /* ── Tag animation ── */
+  .skill-tag {
+    opacity: 0;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .skill-tag.tag-visible {
+    animation: tagPop 0.5s cubic-bezier(0.16,1,0.3,1) forwards;
+  }
+  .skill-tag:hover {
+    border-color: rgba(230,253,69,0.4) !important;
+    background: rgba(230,253,69,0.06) !important;
+    color: #e6fd45 !important;
+  }
+
+  /* ── Timeline dot bounce ── */
+  .timeline-dot {
+    transition: transform 0.3s ease, background 0.3s ease;
+  }
+  .timeline-dot.dot-active {
+    background: #e6fd45;
+    color: #000;
+    transform: scale(1.2);
+  }
+
+  /* ── Nav link indicator ── */
+  .nav-link {
+    position: relative;
+    transition: color 0.2s;
+  }
+  .nav-link::after {
+    content: '';
+    position: absolute; bottom: -4px; left: 0; right: 0;
+    height: 2px; background: #e6fd45;
+    transform: scaleX(0); transform-origin: left;
+    transition: transform 0.3s ease;
+  }
+  .nav-link.active, .nav-link:hover { color: #e6fd45; }
+  .nav-link.active::after, .nav-link:hover::after { transform: scaleX(1); }
+
+  /* ── Magnetic button ── */
+  .mag-btn { transition: transform 0.2s ease, box-shadow 0.2s ease; }
+  .mag-btn:hover { transform: translateY(-2px); }
+  .mag-btn:active { transform: scale(0.97); }
+
+  /* ── Scan line on photo ── */
+  .scan-wrap { position: relative; overflow: hidden; }
+  .scan-line {
+    position: absolute; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, transparent, rgba(230,253,69,0.4), transparent);
+    animation: scanLine 3s linear infinite;
+    pointer-events: none;
+  }
+
+  /* ── Material icons weight ── */
+  .material-symbols-outlined {
+    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+  }
+
+  /* ── Scrollbar ── */
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: #0e0e0e; }
+  ::-webkit-scrollbar-thumb { background: #494847; border-radius: 2px; }
+  ::-webkit-scrollbar-thumb:hover { background: #e6fd45; }
+
+  /* ── Contact form focus ── */
+  .contact-input {
+    background: #1a1919 !important;
+    border: 1px solid #494847 !important;
+    border-radius: 6px;
+    padding: 12px 16px;
+    color: #fff !important;
+    font-family: inherit;
+    font-size: 14px;
+    width: 100%;
+    outline: none !important;
+    box-shadow: none !important;
+    transition: border-color 0.25s, box-shadow 0.25s;
+  }
+  .contact-input:focus {
+    border-color: #e6fd45 !important;
+    box-shadow: 0 0 0 3px rgba(230,253,69,0.08) !important;
+  }
+  .contact-input::placeholder { color: #777575 !important; }
+
+  /* ── Primary gradient (CTA buttons) ── */
+  .primary-gradient {
+    background: linear-gradient(135deg, #e6fd45 0%, #c8e000 100%);
+  }
+  .primary-gradient:hover {
+    background: linear-gradient(135deg, #f0ff6a 0%, #d9f000 100%);
+  }
+
+  /* ── Mobile nav menu ── */
+  #mobile-menu {
+    transition: max-height 0.4s cubic-bezier(0.16,1,0.3,1), opacity 0.3s ease;
+    max-height: 0; overflow: hidden; opacity: 0;
+  }
+  #mobile-menu.open { max-height: 300px; opacity: 1; }
+</style>
+</head>
+<body class="bg-background text-on-surface font-body selection:bg-primary selection:text-black overflow-x-hidden">
+
+<!-- ── TOP NAV ── -->
+<nav class="fixed top-0 w-full z-50 bg-[#0e0e0e]/70 backdrop-blur-xl border-b border-white/10">
+  <div class="flex justify-between items-center px-6 md:px-10 py-4 max-w-7xl mx-auto">
+    <a href="#" class="text-xl font-black tracking-tighter text-white">
+      Mohamed<span class="text-primary">.</span>
+    </a>
+    <div class="hidden md:flex items-center gap-8">
+      <a class="nav-link font-bold tracking-tight text-sm text-on-surface-variant" href="#work">Work</a>
+      <a class="nav-link font-bold tracking-tight text-sm text-on-surface-variant" href="#experience">Experience</a>
+      <a class="nav-link font-bold tracking-tight text-sm text-on-surface-variant" href="#skills">Skills</a>
+      <a class="nav-link font-bold tracking-tight text-sm text-on-surface-variant" href="#contact">Contact</a>
+    </div>
+    <div class="flex items-center gap-3">
+      <a href="#contact" class="mag-btn bg-primary text-black px-5 py-2 rounded-lg font-bold text-sm shadow-[0_0_20px_rgba(230,253,69,0.2)]">
+        Hire Me
+      </a>
+      <button id="menu-toggle" class="md:hidden text-white" aria-label="Menu">
+        <span class="material-symbols-outlined">menu</span>
+      </button>
+    </div>
+  </div>
+  <!-- Mobile menu -->
+  <div id="mobile-menu" class="md:hidden px-6 pb-4 bg-[#0e0e0e]">
+    <div class="flex flex-col gap-4 pt-2 border-t border-white/10">
+      <a href="#work" class="text-on-surface-variant text-sm font-bold hover:text-primary transition-colors">Work</a>
+      <a href="#experience" class="text-on-surface-variant text-sm font-bold hover:text-primary transition-colors">Experience</a>
+      <a href="#skills" class="text-on-surface-variant text-sm font-bold hover:text-primary transition-colors">Skills</a>
+      <a href="#contact" class="text-on-surface-variant text-sm font-bold hover:text-primary transition-colors">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ── HERO ── -->
+<section class="relative pt-40 pb-28 px-6 md:px-10 max-w-7xl mx-auto overflow-visible">
+  <!-- background glow -->
+  <div class="absolute -top-32 -right-32 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[140px] pointer-events-none"></div>
+  <div class="absolute top-1/2 -left-20 w-64 h-64 bg-primary/3 rounded-full blur-[100px] pointer-events-none"></div>
+
+  <div class="relative z-10 flex flex-col md:flex-row items-center md:items-start justify-between gap-14">
+
+    <!-- LEFT -->
+    <div class="flex-1 text-center md:text-left">
+      <span class="hero-eyebrow font-label text-primary tracking-[0.3em] uppercase text-xs mb-6 block">
+        Senior iOS Engineer · Riyadh, Saudi Arabia
+      </span>
+      <h1 class="hero-title font-headline font-black text-6xl md:text-8xl lg:text-[96px] tracking-tighter leading-[0.9] mb-8">
+        <span class="shimmer-text">Mohamed</span><br/>
+        <span class="text-white">Najeh.</span>
+      </h1>
+      <p class="hero-desc max-w-xl text-on-surface-variant text-lg md:text-xl leading-relaxed mb-12 mx-auto md:mx-0">
+        5+ years crafting high-performance iOS apps — from ride-hailing and healthcare
+        to real estate and e-commerce. Clean architecture, real-time systems, and fluid UX.
+      </p>
+      <div class="hero-actions flex flex-wrap gap-4 justify-center md:justify-start">
+        <a href="#work" class="mag-btn primary-gradient text-black font-bold px-8 py-4 rounded-lg shadow-[0_0_30px_rgba(230,253,69,0.18)] inline-flex items-center gap-2">
+          See My Work <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+        </a>
+        <a href="#contact" class="mag-btn border border-outline-variant/40 hover:border-primary text-white font-bold px-8 py-4 rounded-lg inline-flex items-center gap-2 transition-colors">
+          Get In Touch
+        </a>
+      </div>
+    </div>
+
+    <!-- RIGHT — PHOTO -->
+    <div class="hero-photo-col relative flex-shrink-0 flex justify-center">
+      <!-- rotating ring -->
+      <div class="absolute inset-0 flex items-center justify-center">
+        <div class="w-[280px] h-[280px] md:w-[340px] md:h-[340px] rounded-full border border-dashed border-primary/20"
+             style="animation: borderSpin 20s linear infinite;"></div>
+      </div>
+      <div class="profile-float relative">
+        <div class="profile-glow w-60 h-60 md:w-80 md:h-80 rounded-full overflow-hidden border-2 border-primary/30 scan-wrap">
+          <div class="scan-line"></div>
+          <img
+            src="profile.jpg"
+            alt="Mohamed Najeh"
+            class="w-full h-full object-cover object-top transition-all duration-700"
+            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+          />
+          <!-- fallback initials -->
+          <div style="display:none; width:100%; height:100%; background:#1a1919; align-items:center; justify-content:center;">
+            <span style="font-size:72px; font-weight:900; color:#e6fd45; letter-spacing:-3px;">MN</span>
+          </div>
+        </div>
+        <!-- status badge -->
+        <div class="absolute -bottom-3 left-1/2 -translate-x-1/2 flex items-center gap-2 px-4 py-2 bg-surface-container-high rounded-full border border-outline-variant/30 whitespace-nowrap">
+          <span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+          <span class="text-[11px] font-label text-on-surface-variant uppercase tracking-wider">Open to opportunities</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── STATS BAR ── -->
+<section class="py-20 px-6 md:px-10 bg-surface-container-low border-y border-white/5">
+  <div class="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-10 md:gap-8">
+    <div class="stat-card reveal reveal-delay-1 rounded-xl p-4">
+      <div class="font-headline font-black text-5xl text-primary counter" data-target="15" data-suffix="+">0</div>
+      <div class="font-label text-xs uppercase tracking-widest text-on-surface-variant mt-1">Apps Shipped</div>
+    </div>
+    <div class="stat-card reveal reveal-delay-2 rounded-xl p-4">
+      <div class="font-headline font-black text-5xl text-primary counter" data-target="5" data-suffix="+">0</div>
+      <div class="font-label text-xs uppercase tracking-widest text-on-surface-variant mt-1">Years Experience</div>
+    </div>
+    <div class="stat-card reveal reveal-delay-3 rounded-xl p-4">
+      <div class="font-headline font-black text-5xl text-primary counter" data-target="15" data-suffix="%">0</div>
+      <div class="font-label text-xs uppercase tracking-widest text-on-surface-variant mt-1">Retention Increase</div>
+    </div>
+    <div class="stat-card reveal reveal-delay-4 rounded-xl p-4">
+      <div class="font-headline font-black text-5xl text-primary counter" data-target="40" data-suffix="+">0</div>
+      <div class="font-label text-xs uppercase tracking-widest text-on-surface-variant mt-1">Students Mentored</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── EXPERIENCE TIMELINE ── -->
+<section class="py-32 px-6 md:px-10 max-w-7xl mx-auto" id="experience">
+  <div class="reveal">
+    <span class="font-label text-xs text-primary uppercase tracking-widest mb-3 block">Career</span>
+    <h2 class="font-headline font-black text-4xl md:text-5xl mb-20 tracking-tight">
+      Experience <span class="text-primary">.</span>
+    </h2>
+  </div>
+
+  <div class="relative space-y-12
+    before:absolute before:inset-0 before:ml-5 before:-translate-x-px
+    md:before:mx-auto md:before:translate-x-0
+    before:h-full before:w-0.5
+    before:bg-gradient-to-b before:from-primary before:via-outline-variant/40 before:to-transparent">
+
+    <!-- Drovox -->
+    <div class="reveal from-left relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group">
+      <div class="timeline-dot flex items-center justify-center w-10 h-10 rounded-full border-2 border-primary bg-background text-primary shadow-[0_0_16px_rgba(230,253,69,0.25)] shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2">
+        <span class="material-symbols-outlined text-sm">navigation</span>
+      </div>
+      <div class="w-[calc(100%-4rem)] md:w-[45%] p-7 bg-surface-container-high rounded-xl border border-transparent hover:border-primary/25 transition-all duration-500 hover:shadow-[0_0_30px_rgba(230,253,69,0.05)]">
+        <div class="flex items-center justify-between mb-3 flex-wrap gap-2">
+          <time class="font-label text-xs font-bold text-primary">Apr 2022 — Present</time>
+          <span class="bg-primary/10 text-primary border border-primary/20 text-[10px] font-label uppercase tracking-widest px-2 py-1 rounded-sm">Full-Time</span>
+        </div>
+        <div class="font-headline font-bold text-xl mb-1">Drovox</div>
+        <div class="text-on-surface-variant text-sm mb-4 font-label">Senior iOS Developer</div>
+        <ul class="space-y-2 text-on-surface-variant text-sm leading-relaxed">
+          <li class="flex gap-2"><span class="text-primary mt-1 shrink-0">·</span>Revamped Passenger App from MVC → MVVM, boosting modularity and feature scalability</li>
+          <li class="flex gap-2"><span class="text-primary mt-1 shrink-0">·</span>15% increase in user retention and 10% reduction in crash rate</li>
+          <li class="flex gap-2"><span class="text-primary mt-1 shrink-0">·</span>Migrated real-time backend from Firebase → AWS AppSync for live tracking at scale</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Shabek -->
+    <div class="reveal from-right relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group">
+      <div class="timeline-dot flex items-center justify-center w-10 h-10 rounded-full border border-outline-variant bg-background text-on-surface-variant shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2">
+        <span class="material-symbols-outlined text-sm">apartment</span>
+      </div>
+      <div class="w-[calc(100%-4rem)] md:w-[45%] p-7 bg-surface-container-high rounded-xl border border-transparent hover:border-primary/25 transition-all duration-500 hover:shadow-[0_0_30px_rgba(230,253,69,0.05)]">
+        <div class="flex items-center justify-between mb-3 flex-wrap gap-2">
+          <time class="font-label text-xs font-bold text-primary">Dec 2024 — Present</time>
+          <span class="bg-outline-variant/20 text-on-surface-variant border border-outline-variant/30 text-[10px] font-label uppercase tracking-widest px-2 py-1 rounded-sm">Part-Time</span>
+        </div>
+        <div class="font-headline font-bold text-xl mb-1">Shabek</div>
+        <div class="text-on-surface-variant text-sm mb-4 font-label">Senior iOS Engineer</div>
+        <ul class="space-y-2 text-on-surface-variant text-sm leading-relaxed">
+          <li class="flex gap-2"><span class="text-primary mt-1 shrink-0">·</span>Built Yozya — a real estate app for North Coast properties with 3D property viewing</li>
+          <li class="flex gap-2"><span class="text-primary mt-1 shrink-0">·</span>Integrated service flows: housekeeping, transportation, and booking management</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Atmosphere -->
+    <div class="reveal from-left relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group">
+      <div class="timeline-dot flex items-center justify-center w-10 h-10 rounded-full border border-outline-variant bg-background text-on-surface-variant shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2">
+        <span class="material-symbols-outlined text-sm">school</span>
+      </div>
+      <div class="w-[calc(100%-4rem)] md:w-[45%] p-7 bg-surface-container-high rounded-xl border border-transparent hover:border-primary/25 transition-all duration-500 hover:shadow-[0_0_30px_rgba(230,253,69,0.05)]">
+        <div class="flex items-center justify-between mb-3 flex-wrap gap-2">
+          <time class="font-label text-xs font-bold text-primary">Jul 2023 — Jul 2024</time>
+          <span class="bg-outline-variant/20 text-on-surface-variant border border-outline-variant/30 text-[10px] font-label uppercase tracking-widest px-2 py-1 rounded-sm">Contract</span>
+        </div>
+        <div class="font-headline font-bold text-xl mb-1">Atmosphere Software</div>
+        <div class="text-on-surface-variant text-sm mb-4 font-label">iOS Instructor</div>
+        <ul class="space-y-2 text-on-surface-variant text-sm leading-relaxed">
+          <li class="flex gap-2"><span class="text-primary mt-1 shrink-0">·</span>Mentored 40+ students from Swift fundamentals to App Store deployment</li>
+          <li class="flex gap-2"><span class="text-primary mt-1 shrink-0">·</span>Developed course materials, coding challenges, and real-world guided projects</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Lnkr -->
+    <div class="reveal from-right relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group">
+      <div class="timeline-dot flex items-center justify-center w-10 h-10 rounded-full border border-outline-variant bg-background text-on-surface-variant shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2">
+        <span class="material-symbols-outlined text-sm">medical_services</span>
+      </div>
+      <div class="w-[calc(100%-4rem)] md:w-[45%] p-7 bg-surface-container-high rounded-xl border border-transparent hover:border-primary/25 transition-all duration-500 hover:shadow-[0_0_30px_rgba(230,253,69,0.05)]">
+        <div class="flex items-center justify-between mb-3 flex-wrap gap-2">
+          <time class="font-label text-xs font-bold text-primary">Nov 2022 — Jul 2023</time>
+          <span class="bg-outline-variant/20 text-on-surface-variant border border-outline-variant/30 text-[10px] font-label uppercase tracking-widest px-2 py-1 rounded-sm">Part-Time</span>
+        </div>
+        <div class="font-headline font-bold text-xl mb-1">Lnkr Technologies</div>
+        <div class="text-on-surface-variant text-sm mb-4 font-label">iOS Developer</div>
+        <ul class="space-y-2 text-on-surface-variant text-sm leading-relaxed">
+          <li class="flex gap-2"><span class="text-primary mt-1 shrink-0">·</span>Built five healthcare apps: Clinic, Patient, Labs, Pharmacy, and Scans</li>
+          <li class="flex gap-2"><span class="text-primary mt-1 shrink-0">·</span>Integrated NFC medical card scanning for faster patient onboarding</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Termno -->
+    <div class="reveal from-left relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group">
+      <div class="timeline-dot flex items-center justify-center w-10 h-10 rounded-full border border-outline-variant bg-background text-on-surface-variant shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2">
+        <span class="material-symbols-outlined text-sm">storefront</span>
+      </div>
+      <div class="w-[calc(100%-4rem)] md:w-[45%] p-7 bg-surface-container-high rounded-xl border border-transparent hover:border-primary/25 transition-all duration-500 hover:shadow-[0_0_30px_rgba(230,253,69,0.05)]">
+        <div class="flex items-center justify-between mb-3 flex-wrap gap-2">
+          <time class="font-label text-xs font-bold text-primary">May 2020 — Oct 2020</time>
+          <span class="bg-outline-variant/20 text-on-surface-variant border border-outline-variant/30 text-[10px] font-label uppercase tracking-widest px-2 py-1 rounded-sm">Full-Time</span>
+        </div>
+        <div class="font-headline font-bold text-xl mb-1">Termno</div>
+        <div class="text-on-surface-variant text-sm mb-4 font-label">iOS Developer</div>
+        <ul class="space-y-2 text-on-surface-variant text-sm leading-relaxed">
+          <li class="flex gap-2"><span class="text-primary mt-1 shrink-0">·</span>Developed two customized e-commerce apps aligned with client business workflows</li>
+          <li class="flex gap-2"><span class="text-primary mt-1 shrink-0">·</span>Enhanced API integration for product, order, and payment management</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── PROJECTS GRID ── -->
+<section class="py-32 px-6 md:px-10 bg-surface-container-lowest" id="work">
+  <div class="max-w-7xl mx-auto">
+    <div class="reveal flex flex-col md:flex-row md:items-end justify-between gap-6 mb-20">
+      <div>
+        <span class="font-label text-xs text-primary uppercase tracking-widest mb-3 block">Portfolio</span>
+        <h2 class="font-headline font-black text-4xl md:text-5xl tracking-tight">
+          App Store Showcase <span class="text-primary">.</span>
+        </h2>
+      </div>
+      <p class="font-label text-xs uppercase tracking-widest text-on-surface-variant max-w-xs">
+        Built for scale, engineered for performance.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-6 gap-5">
+
+      <!-- YOZYA — large -->
+      <div class="reveal md:col-span-4 project-card-wrap group relative overflow-hidden bg-surface-container rounded-xl aspect-video md:aspect-auto md:h-[480px] cursor-pointer">
+        <img class="w-full h-full object-cover opacity-50 group-hover:opacity-70 group-hover:scale-105 transition-all duration-700"
+             src="https://lh3.googleusercontent.com/aida-public/AB6AXuC69VtOGv5qlCjA8c9b6Iv_mGtvVh-79uwiln9m2oZ2iwiDDxIceA7xdylGvE30-6t5DO7vLTicIpTxPfYnaD8Mu2Alx0wtzzbZ2o7ERURB6npefoPc_Zm3a3fOh5eQbvqU2f1Gk_6o7tLa0fipoE_YzWC2dwDsuGa1vKRDYm1q3n4xXSUDlLyk3T7odNC40Qy2gFjM85HiZH4NYq0MRvei8jMWf1mZN3WqdRV4Q8M19BYwYe_T40q73duKQ5MOCL2LQwoS00NW6eSC"
+             alt="YOZYA App"/>
+        <div class="absolute inset-0 bg-gradient-to-t from-background via-background/30 to-transparent"></div>
+        <div class="project-content absolute bottom-0 p-8">
+          <div class="flex gap-2 mb-4">
+            <span class="bg-surface-container-highest/90 backdrop-blur px-3 py-1 rounded-sm text-[10px] font-label uppercase tracking-widest text-primary">Swift · UIKit · MVVM</span>
+            <span class="bg-surface-container-highest/90 backdrop-blur px-3 py-1 rounded-sm text-[10px] font-label uppercase tracking-widest text-on-surface-variant">Real Estate</span>
+          </div>
+          <h3 class="font-headline font-black text-3xl mb-2">YOZYA</h3>
+          <p class="text-on-surface-variant max-w-md text-sm leading-relaxed">
+            Real estate platform for North Coast properties — 3D property viewing, housekeeping,
+            and transportation service integration built with SwiftUI & UIKit.
+          </p>
+        </div>
+        <div class="absolute top-6 right-6 w-10 h-10 bg-primary/10 border border-primary/20 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+          <span class="material-symbols-outlined text-primary text-sm">arrow_outward</span>
+        </div>
+      </div>
+
+      <!-- Drovox -->
+      <div class="reveal reveal-delay-1 md:col-span-2 project-card-wrap group relative overflow-hidden bg-surface-container rounded-xl min-h-[400px] cursor-pointer">
+        <img class="w-full h-full object-cover opacity-40 group-hover:opacity-60 group-hover:scale-105 transition-all duration-700"
+             src="https://lh3.googleusercontent.com/aida-public/AB6AXuB9gRbw14QzdFKa2W4B6idkRKwoFXHzUxD2Ut0nkVsFMMAKfWnc0r4ctTSqCNJdBhhfSRUMclCaSoJk3dqD0FRPs985vhkcVHSCx0TnQzbZ0nzqp9-sMk-k72Tgv2vt_JQ9c42T_XFgxqCiQglTCRwnIkrA9QKeNTIB9OfGzkbo6XJs6mK-KOxVBJqX3KrKEbmrIPN7XWmI9VZaMcQ9aKcbfH1GHNfS1jsPJhjuvMgNhPHtGg9g42LOdvkOhKDxGo0sCNEVriXNKsLi"
+             alt="Drovox App"/>
+        <div class="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent"></div>
+        <div class="project-content absolute bottom-0 p-7">
+          <span class="bg-surface-container-highest/90 backdrop-blur px-3 py-1 rounded-sm text-[10px] font-label uppercase tracking-widest text-primary mb-4 inline-block">Swift · AWS AppSync</span>
+          <h3 class="font-headline font-bold text-2xl mb-2">Drovox Ecosystem</h3>
+          <p class="text-on-surface-variant text-sm leading-relaxed">
+            Ride-hailing suite — Passenger, Merchant & Hero apps with real-time live tracking and payments.
+          </p>
+        </div>
+      </div>
+
+      <!-- Lnkr -->
+      <div class="reveal reveal-delay-1 md:col-span-2 project-card-wrap group relative overflow-hidden bg-surface-container rounded-xl min-h-[380px] cursor-pointer">
+        <img class="w-full h-full object-cover opacity-40 group-hover:opacity-60 group-hover:scale-105 transition-all duration-700"
+             src="https://lh3.googleusercontent.com/aida-public/AB6AXuAysrZ05R-JBl4XovKRd4MGWXMB4HvfVTNO9pawAKj-Ht9p1k18A3Qmk3kM_mPDT8Ue5oo7-g5uYX-bleD1FB1e68zK5x-B57ABDxAYNgO2RItaa_F3Y0Yuu53_1zVFP9tmyK280zaAcBYwr1DKDMvzFAjKyOsTHRbG-6ncKxo3G21FpAYYNhhABcJSA18fzT28gHahN-UKAPsAWOVUz23yDPeDBMWUBjhSV6lzLzmzpGQ9rarWT1Peu7rHlBlCBAJzNCdGJhfrixrH"
+             alt="Lnkr Healthcare"/>
+        <div class="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent"></div>
+        <div class="project-content absolute bottom-0 p-7">
+          <span class="bg-surface-container-highest/90 backdrop-blur px-3 py-1 rounded-sm text-[10px] font-label uppercase tracking-widest text-primary mb-4 inline-block">Swift · NFC · REST</span>
+          <h3 class="font-headline font-bold text-2xl mb-2">Lnkr Healthcare Suite</h3>
+          <p class="text-on-surface-variant text-sm leading-relaxed">
+            5 healthcare apps — Clinic, Patient, Labs, Pharmacy & Scans — with NFC medical card scanning.
+          </p>
+        </div>
+      </div>
+
+      <!-- Atmodrive + Haftaa -->
+      <div class="reveal reveal-delay-2 md:col-span-2 grid grid-cols-1 gap-5">
+        <div class="project-card-wrap group relative overflow-hidden bg-surface-container rounded-xl min-h-[180px] cursor-pointer">
+          <img class="w-full h-full object-cover opacity-35 group-hover:opacity-55 group-hover:scale-105 transition-all duration-700"
+               src="https://lh3.googleusercontent.com/aida-public/AB6AXuC2Ru6Z230JR9ue--8siNG3G1BUhmWvgvmk__ADlhT8UKh3yFN9XutfBWircVDY-cF3owdVyJmW0wWr001_1aKeUacv-AwoNRBHK4Ntgj2eW36qmFLdaTpsWSBoi5GHMDR1Zxd6uA2ozHbglzBWvu9ebkwageJTJF-1bhNhr5w8u6ffnmkKtWAsOP-gfM8CSwh162xDTxBqucU24Q0YIdBeCQZKFW1cw5COk0UPf-XNsH1mPiOjOjMWc7zYqKkGkNFdLqdCoDa4Qz3a"
+               alt="Atmodrive"/>
+          <div class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent"></div>
+          <div class="project-content absolute bottom-0 p-5">
+            <h3 class="font-headline font-bold text-lg mb-1">Atmodrive Driver</h3>
+            <p class="text-on-surface-variant text-xs leading-relaxed">Real-time navigation, trip & earnings management.</p>
+          </div>
+        </div>
+        <div class="project-card-wrap group relative overflow-hidden bg-surface-container rounded-xl min-h-[180px] cursor-pointer">
+          <img class="w-full h-full object-cover opacity-35 group-hover:opacity-55 group-hover:scale-105 transition-all duration-700"
+               src="https://lh3.googleusercontent.com/aida-public/AB6AXuA7dj0ytJqeeFNk4sq8j2y4Nzs6IwPQVT9Ald_wO_MC4tTOcnsX-FlyWzS8Z-p2XTjtur8nEArCiGziTdXUgC3K6Kbi5tNZqdDIbac6TH6cYbx4xDwzxsmuC_T8RLTCCBAdFPPJeg_X3eMzm1mWYh94dk5-kZEnopuEtgvgRihGykrjesd3jidiiXe4sO0nd6gN6I13EeQcxFBVNDbFADRrBl3znNuLnmxcUPBEIVXO6wmyOiAozqe6KP9EkDCgZ-GgMMChFknEbARO"
+               alt="Haftaa"/>
+          <div class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent"></div>
+          <div class="project-content absolute bottom-0 p-5">
+            <h3 class="font-headline font-bold text-lg mb-1">Haftaa</h3>
+            <p class="text-on-surface-variant text-xs leading-relaxed">Feature-rich marketplace with order & payment flows.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── SKILLS ── -->
+<section class="py-32 px-6 md:px-10 max-w-7xl mx-auto" id="skills">
+  <div class="grid grid-cols-1 lg:grid-cols-12 gap-16">
+
+    <div class="lg:col-span-4 reveal">
+      <span class="font-label text-xs text-primary uppercase tracking-widest mb-3 block">Toolkit</span>
+      <h2 class="font-headline font-black text-4xl md:text-5xl mb-6 tracking-tight">
+        Tech Stack <span class="text-primary">.</span>
+      </h2>
+      <p class="text-on-surface-variant mb-8 leading-relaxed">
+        A specialized toolkit refined over 15+ production apps, optimized for
+        performance, maintainability, and clean architecture.
+      </p>
+      <div class="p-6 bg-surface-container-low rounded-xl border-l-4 border-primary">
+        <p class="text-xs font-label text-primary uppercase tracking-widest mb-2">🏆 Award</p>
+        <p class="text-on-surface-variant text-sm leading-relaxed">
+          1st Place — Ebdaa Competition for graduation project excellence.
+        </p>
+      </div>
+    </div>
+
+    <div class="lg:col-span-8 grid grid-cols-1 md:grid-cols-2 gap-10 skill-group">
+
+      <div class="reveal reveal-delay-1 space-y-4">
+        <h3 class="font-headline font-bold text-base flex items-center gap-2">
+          <span class="material-symbols-outlined text-primary">smartphone</span> iOS Core
+        </h3>
+        <div class="flex flex-wrap gap-2">
+          <span class="skill-tag bg-surface-container-highest px-4 py-2 rounded-lg font-label text-xs text-on-surface-variant border border-transparent">Swift</span>
+          <span class="skill-tag bg-surface-container-highest px-4 py-2 rounded-lg font-label text-xs text-on-surface-variant border border-transparent">SwiftUI</span>
+          <span class="skill-tag bg-surface-container-highest px-4 py-2 rounded-lg font-label text-xs text-on-surface-variant border border-transparent">UIKit</span>
+          <span class="skill-tag bg-surface-container-highest px-4 py-2 rounded-lg font-label text-xs text-on-surface-variant border border-transparent">Combine</span>
+          <span class="skill-tag bg-surface-container-highest px-4 py-2 rounded-lg font-label text-xs text-on-surface-variant border border-transparent">Objective-C</span>
+        </div>
+      </div>
+
+      <div class="reveal reveal-delay-2 space-y-4">
+        <h3 class="font-headline font-bold text-base flex items-center gap-2">
+          <span class="material-symbols-outlined text-primary">architecture</span> Architecture
+        </h3>
+        <div class="flex flex-wrap gap-2">
+          <span class="skill-tag bg-surface-container-highest px-4 py-2 rounded-lg font-label text-xs text-on-surface-variant border border-transparent">MVVM</span>
+          <span class="skill-tag bg-surface-container-highest px-4 py-2 rounded-lg font-label text-xs text-on-surface-variant border border-transparent">MVC</span>
+          <span class="skill-tag bg-surface-container-highest px-4 py-2 rounded-lg font-label text-xs text-on-surface-variant border border-transparent">Clean Architecture</span>
+          <span class="skill-tag bg-surface-container-highest px-4 py-2 rounded-lg font-label text-xs text-on-surface-variant border border-transparent">Modularization</span>
+        </div>
+      </div>
+
+      <div class="reveal reveal-delay-3 space-y-4">
+        <h3 class="font-headline font-bold text-base flex items-center gap-2">
+          <span class="material-symbols-outlined text-primary">cloud</span> Backend & APIs
+        </h3>
+        <div class="flex flex-wrap gap-2">
+          <span class="skill-tag bg-surface-container-highest px-4 py-2 rounded-lg font-label text-xs text-on-surface-variant border border-transparent">Firebase</span>
+          <span class="skill-tag bg-surface-container-highest px-4 py-2 rounded-lg font-label text-xs text-on-surface-variant border border-transparent">AWS AppSync</span>
+          <span class="skill-tag bg-surface-container-highest px-4 py-2 rounded-lg font-label text-xs text-on-surface-variant border border-transparent">REST</span>
+          <span class="skill-tag bg-surface-container-highest px-4 py-2 rounded-lg font-label text-xs text-on-surface-variant border border-transparent">GraphQL</span>
+          <span class="skill-tag bg-surface-container-highest px-4 py-2 rounded-lg font-label text-xs text-on-surface-variant border border-transparent">Socket.IO</span>
+        </div>
+      </div>
+
+      <div class="reveal reveal-delay-4 space-y-4">
+        <h3 class="font-headline font-bold text-base flex items-center gap-2">
+          <span class="material-symbols-outlined text-primary">map</span> Maps & Tools
+        </h3>
+        <div class="flex flex-wrap gap-2">
+          <span class="skill-tag bg-surface-container-highest px-4 py-2 rounded-lg font-label text-xs text-on-surface-variant border border-transparent">MapKit</span>
+          <span class="skill-tag bg-surface-container-highest px-4 py-2 rounded-lg font-label text-xs text-on-surface-variant border border-transparent">Google Maps SDK</span>
+          <span class="skill-tag bg-surface-container-highest px-4 py-2 rounded-lg font-label text-xs text-on-surface-variant border border-transparent">Xcode</span>
+          <span class="skill-tag bg-surface-container-highest px-4 py-2 rounded-lg font-label text-xs text-on-surface-variant border border-transparent">TestFlight</span>
+          <span class="skill-tag bg-surface-container-highest px-4 py-2 rounded-lg font-label text-xs text-on-surface-variant border border-transparent">Git</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── CONTACT ── -->
+<section class="py-32 px-6 md:px-10 bg-surface-container-low border-t border-white/5" id="contact">
+  <div class="max-w-7xl mx-auto">
+    <div class="reveal mb-16">
+      <span class="font-label text-xs text-primary uppercase tracking-widest mb-3 block">Get In Touch</span>
+      <h2 class="font-headline font-black text-4xl md:text-5xl tracking-tight">
+        Let's Work Together <span class="text-primary">.</span>
+      </h2>
+    </div>
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+
+      <!-- Left -->
+      <div class="reveal space-y-6">
+        <p class="text-on-surface-variant text-lg leading-relaxed">
+          Open to senior iOS engineering roles, freelance projects, and long-term partnerships.
+          Based in <span class="text-white font-bold">Riyadh</span> — available remotely worldwide.
+        </p>
+        <div class="space-y-4">
+          <a href="mailto:mohamed.najeh.ahmed@gmail.com"
+             class="flex items-center gap-3 text-on-surface-variant hover:text-primary transition-colors group">
+            <span class="material-symbols-outlined group-hover:scale-110 transition-transform">mail</span>
+            mohamed.najeh.ahmed@gmail.com
+          </a>
+        </div>
+        <div class="flex flex-wrap gap-3 pt-4">
+          <a href="https://github.com/MohamedNajeh" target="_blank"
+             class="mag-btn flex items-center gap-2 px-5 py-3 border border-outline-variant/40 hover:border-primary text-on-surface-variant hover:text-primary rounded-lg text-sm font-bold transition-all">
+            <span class="material-symbols-outlined text-[18px]">code</span> GitHub
+          </a>
+          <a href="https://linkedin.com/in/mohammed-najeh-15b6a0147" target="_blank"
+             class="mag-btn flex items-center gap-2 px-5 py-3 border border-outline-variant/40 hover:border-primary text-on-surface-variant hover:text-primary rounded-lg text-sm font-bold transition-all">
+            <span class="material-symbols-outlined text-[18px]">work</span> LinkedIn
+          </a>
+        </div>
+      </div>
+
+      <!-- Contact form -->
+      <form class="reveal reveal-delay-2 space-y-4" onsubmit="handleSubmit(event)">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label class="font-label text-[10px] uppercase tracking-widest text-on-surface-variant mb-2 block">Name</label>
+            <input type="text" placeholder="Your name" class="contact-input" required/>
+          </div>
+          <div>
+            <label class="font-label text-[10px] uppercase tracking-widest text-on-surface-variant mb-2 block">Email</label>
+            <input type="email" placeholder="your@email.com" class="contact-input" required/>
+          </div>
+        </div>
+        <div>
+          <label class="font-label text-[10px] uppercase tracking-widest text-on-surface-variant mb-2 block">Subject</label>
+          <input type="text" placeholder="Project inquiry / Job opportunity" class="contact-input"/>
+        </div>
+        <div>
+          <label class="font-label text-[10px] uppercase tracking-widest text-on-surface-variant mb-2 block">Message</label>
+          <textarea rows="5" placeholder="Tell me about your project..." class="contact-input resize-none"></textarea>
+        </div>
+        <button type="submit"
+                class="mag-btn w-full primary-gradient text-black font-bold py-4 rounded-lg text-sm shadow-[0_0_30px_rgba(230,253,69,0.15)] flex items-center justify-center gap-2">
+          Send Message <span class="material-symbols-outlined text-[18px]">send</span>
+        </button>
+        <p id="form-success" class="text-primary text-sm text-center hidden">✓ Message sent! I'll get back to you soon.</p>
+      </form>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer class="bg-[#0a0a0a] w-full py-10 px-6 md:px-10 border-t border-white/5" >
+  <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
+    <div class="text-center md:text-left">
+      <div class="text-lg font-black text-white tracking-tighter mb-1">
+        Mohamed<span class="text-primary">.</span>
+      </div>
+      <div class="font-label text-xs uppercase tracking-widest text-on-surface-variant">
+        Senior iOS Engineer · mohamednajeh.com
+      </div>
+    </div>
+    <div class="flex gap-6 justify-center">
+      <a class="text-on-surface-variant hover:text-primary transition-colors text-xs uppercase tracking-widest font-label"
+         href="https://linkedin.com/in/mohammed-najeh-15b6a0147" target="_blank">LinkedIn</a>
+      <a class="text-on-surface-variant hover:text-primary transition-colors text-xs uppercase tracking-widest font-label"
+         href="https://github.com/MohamedNajeh" target="_blank">GitHub</a>
+      <a class="text-on-surface-variant hover:text-primary transition-colors text-xs uppercase tracking-widest font-label"
+         href="mailto:mohamed.najeh.ahmed@gmail.com">Email</a>
+    </div>
+    <div class="flex items-center gap-2 px-4 py-2 rounded-full bg-surface-container-high border border-outline-variant/20">
+      <span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+      <span class="text-[10px] font-label text-on-surface-variant tracking-wider uppercase">Available for hire</span>
+    </div>
+  </div>
+  <div class="max-w-7xl mx-auto mt-8 pt-6 border-t border-white/5 text-center">
+    <p class="font-label text-xs text-on-surface-variant/50">© 2026 Mohamed Najeh. All rights reserved.</p>
+  </div>
+</footer>
+
+<!-- ══════════════════════════════════════════
+     ANIMATION ENGINE
+══════════════════════════════════════════ -->
+<script>
+// ── 1. Mobile Menu Toggle ──
+const menuToggle = document.getElementById('menu-toggle');
+const mobileMenu = document.getElementById('mobile-menu');
+menuToggle.addEventListener('click', () => {
+  mobileMenu.classList.toggle('open');
+});
+document.querySelectorAll('#mobile-menu a').forEach(a => {
+  a.addEventListener('click', () => mobileMenu.classList.remove('open'));
+});
+
+// ── 2. Active nav link on scroll ──
+const sections = document.querySelectorAll('section[id], footer[id]');
+const navLinks = document.querySelectorAll('.nav-link');
+const navObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const id = entry.target.id;
+      navLinks.forEach(l => {
+        l.classList.toggle('active', l.getAttribute('href') === `#${id}`);
+      });
+    }
+  });
+}, { rootMargin: '-40% 0px -55% 0px' });
+sections.forEach(s => navObserver.observe(s));
+
+// ── 3. Scroll Reveal ──
+const revealEls = document.querySelectorAll('.reveal');
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.1 });
+revealEls.forEach(el => revealObserver.observe(el));
+
+// ── 4. Counter Animation ──
+function animateCounter(el) {
+  const target   = parseInt(el.dataset.target, 10);
+  const suffix   = el.dataset.suffix || '';
+  const duration = 1800;
+  const start    = performance.now();
+  const easeOut  = t => 1 - Math.pow(1 - t, 3);
+  function frame(now) {
+    const progress = Math.min((now - start) / duration, 1);
+    el.textContent = Math.floor(easeOut(progress) * target) + suffix;
+    if (progress < 1) requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+}
+
+const counterObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting && !entry.target.dataset.counted) {
+      entry.target.dataset.counted = 'true';
+      animateCounter(entry.target);
+    }
+  });
+}, { threshold: 0.5 });
+document.querySelectorAll('.counter').forEach(el => counterObserver.observe(el));
+
+// ── 5. Staggered Skill Tags ──
+const skillObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.querySelectorAll('.skill-tag').forEach((tag, i) => {
+        setTimeout(() => tag.classList.add('tag-visible'), i * 60);
+      });
+      skillObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.2 });
+document.querySelector('.skill-group') &&
+  skillObserver.observe(document.querySelector('.skill-group'));
+
+// ── 6. Timeline dot highlight on scroll ──
+const dotObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    const dot = entry.target.querySelector('.timeline-dot');
+    if (dot) dot.classList.toggle('dot-active', entry.isIntersecting);
+  });
+}, { threshold: 0.5 });
+document.querySelectorAll('.exp-item-wrap, [class*="relative flex items-center"]')
+  .forEach(el => dotObserver.observe(el));
+
+// ── 7. Contact form handler (Formspree) ──
+// To activate: sign up at formspree.io, create a form, then replace
+// YOUR_FORM_ID below with your actual form ID (e.g. "xyzabcde")
+const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xnjojoog';
+
+async function handleSubmit(e) {
+  e.preventDefault();
+  const form = e.target;
+  const btn  = form.querySelector('button[type="submit"]');
+  const successMsg = document.getElementById('form-success');
+
+  btn.innerHTML = 'Sending… <span class="material-symbols-outlined text-[18px]">hourglass_top</span>';
+  btn.disabled = true;
+
+  try {
+    const res = await fetch(FORMSPREE_ENDPOINT, {
+      method:  'POST',
+      headers: { 'Accept': 'application/json' },
+      body:    new FormData(form),
+    });
+
+    if (res.ok) {
+      btn.innerHTML = '✓ Sent! <span class="material-symbols-outlined text-[18px]">check_circle</span>';
+      successMsg.classList.remove('hidden');
+      form.reset();
+      setTimeout(() => {
+        btn.innerHTML = 'Send Message <span class="material-symbols-outlined text-[18px]">send</span>';
+        btn.disabled  = false;
+        successMsg.classList.add('hidden');
+      }, 4000);
+    } else {
+      throw new Error('Server error');
+    }
+  } catch {
+    btn.innerHTML = 'Failed — try emailing directly <span class="material-symbols-outlined text-[18px]">error</span>';
+    btn.style.background = '#ff7351';
+    setTimeout(() => {
+      btn.innerHTML = 'Send Message <span class="material-symbols-outlined text-[18px]">send</span>';
+      btn.style.background = '';
+      btn.disabled = false;
+    }, 4000);
+  }
+}
+
+// ── 8. Parallax glow on mouse move ──
+document.addEventListener('mousemove', (e) => {
+  const x = (e.clientX / window.innerWidth  - 0.5) * 30;
+  const y = (e.clientY / window.innerHeight - 0.5) * 30;
+  document.querySelectorAll('.hero::after, [class*="blur-\\[140px\\]"]').forEach(el => {
+    el.style.transform = `translate(${x}px, ${y}px)`;
+  });
+});
+
+// ── 9. Nav shrink on scroll ──
+const nav = document.querySelector('nav');
+window.addEventListener('scroll', () => {
+  nav.style.padding = window.scrollY > 60 ? '12px 0' : '';
+}, { passive: true });
+</script>
+
+</body>
+</html>
