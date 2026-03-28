@@ -3,6 +3,10 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta name="theme-color" content="#0e0e0e"/>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
+<link rel="apple-touch-icon" href="/profile.jpg"/>
+<link rel="sitemap" type="application/xml" href="/sitemap.xml"/>
 <title>Mohamed Najeh | Senior iOS Engineer</title>
 
 <!-- ── Google Analytics 4 ── -->
@@ -27,8 +31,8 @@
 <meta property="og:title" content="Mohamed Najeh | Senior iOS Engineer"/>
 <meta property="og:description" content="5+ years crafting high-performance iOS apps — ride-hailing, healthcare, real estate &amp; e-commerce. Clean architecture, real-time systems, fluid UX."/>
 <meta property="og:image" content="https://mohamednajeh.com/profile.jpg"/>
-<meta property="og:locale" content="ar_SA"/>
-<meta property="og:locale:alternate" content="en_US"/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:locale:alternate" content="ar_SA"/>
 <meta property="og:site_name" content="Mohamed Najeh"/>
 
 <!-- ── Twitter Card ── -->
@@ -423,6 +427,9 @@
         <a href="#contact" class="mag-btn border border-outline-variant/40 hover:border-primary text-white font-bold px-8 py-4 rounded-lg inline-flex items-center gap-2 transition-colors" data-i18n="hero-cta-contact">
           تواصل معي
         </a>
+        <a href="cv.pdf" download class="mag-btn border border-outline-variant/40 hover:border-primary text-on-surface-variant hover:text-white font-bold px-8 py-4 rounded-lg inline-flex items-center gap-2 transition-colors" data-i18n="hero-cta-cv">
+          تحميل السيرة الذاتية <span class="material-symbols-outlined text-[18px]">download</span>
+        </a>
       </div>
     </div>
 
@@ -807,20 +814,20 @@
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
             <label class="font-label text-[10px] uppercase tracking-widest text-on-surface-variant mb-2 block" data-i18n="contact-name">الاسم</label>
-            <input type="text" data-i18n-placeholder="contact-name-ph" placeholder="اسمك الكريم" class="contact-input" required/>
+            <input type="text" name="name" data-i18n-placeholder="contact-name-ph" placeholder="اسمك الكريم" class="contact-input" required/>
           </div>
           <div>
             <label class="font-label text-[10px] uppercase tracking-widest text-on-surface-variant mb-2 block" data-i18n="contact-email">البريد الإلكتروني</label>
-            <input type="email" data-i18n-placeholder="contact-email-ph" placeholder="بريدك@الإلكتروني.com" class="contact-input" required/>
+            <input type="email" name="email" data-i18n-placeholder="contact-email-ph" placeholder="بريدك@الإلكتروني.com" class="contact-input" required/>
           </div>
         </div>
         <div>
           <label class="font-label text-[10px] uppercase tracking-widest text-on-surface-variant mb-2 block" data-i18n="contact-subject">الموضوع</label>
-          <input type="text" data-i18n-placeholder="contact-subject-ph" placeholder="استفسار مشروع / فرصة عمل" class="contact-input"/>
+          <input type="text" name="subject" data-i18n-placeholder="contact-subject-ph" placeholder="استفسار مشروع / فرصة عمل" class="contact-input"/>
         </div>
         <div>
           <label class="font-label text-[10px] uppercase tracking-widest text-on-surface-variant mb-2 block" data-i18n="contact-message">الرسالة</label>
-          <textarea rows="5" data-i18n-placeholder="contact-msg-ph" placeholder="أخبرني عن مشروعك..." class="contact-input resize-none"></textarea>
+          <textarea rows="5" name="message" data-i18n-placeholder="contact-msg-ph" placeholder="أخبرني عن مشروعك..." class="contact-input resize-none"></textarea>
         </div>
         <button type="submit"
                 class="mag-btn w-full primary-gradient text-black font-bold py-4 rounded-lg text-sm shadow-[0_0_30px_rgba(230,253,69,0.15)] flex items-center justify-center gap-2">
@@ -1017,7 +1024,7 @@ const translations = {
     'nav-contact': 'Contact', 'nav-hire': 'Hire Me',
     'hero-eyebrow': 'Senior iOS Engineer · Riyadh, Saudi Arabia',
     'hero-desc': '5+ years crafting high-performance iOS apps — from ride-hailing and healthcare to real estate and e-commerce. Clean architecture, real-time systems, and fluid UX.',
-    'hero-cta-work': 'See My Work', 'hero-cta-contact': 'Get In Touch', 'hero-status': 'Open to opportunities',
+    'hero-cta-work': 'See My Work', 'hero-cta-contact': 'Get In Touch', 'hero-cta-cv': 'Download CV', 'hero-status': 'Open to opportunities',
     'stat-apps': 'Apps Shipped', 'stat-years': 'Years Experience', 'stat-retention': 'Retention Increase', 'stat-students': 'Students Mentored',
     'exp-label': 'Career', 'exp-title': 'Experience',
     'exp-drovox-date': 'Apr 2022 — Present', 'exp-drovox-type': 'Full-Time', 'exp-drovox-role': 'Senior iOS Developer',
@@ -1062,7 +1069,7 @@ const translations = {
     'nav-contact': 'تواصل', 'nav-hire': 'وظّفني',
     'hero-eyebrow':'iOS Engineer · الرياض، المملكة العربية السعودية',
     'hero-desc': 'أكثر من 5 سنوات في بناء تطبيقات iOS عالية الأداء — من خدمات توصيل الركاب والرعاية الصحية إلى العقارات والتجارة الإلكترونية. معمارية نظيفة وأنظمة فورية وتجربة مستخدم سلسة.',
-    'hero-cta-work': 'شاهد أعمالي', 'hero-cta-contact': 'تواصل معي', 'hero-status': 'متاح للفرص',
+    'hero-cta-work': 'شاهد أعمالي', 'hero-cta-contact': 'تواصل معي', 'hero-cta-cv': 'تحميل السيرة الذاتية', 'hero-status': 'متاح للفرص',
     'stat-apps': 'تطبيق منشور', 'stat-years': 'سنوات خبرة', 'stat-retention': 'زيادة الاحتفاظ', 'stat-students': 'طالب تدرّب',
     'exp-label': 'المسيرة المهنية', 'exp-title': 'الخبرة',
     'exp-drovox-date': 'أبريل 2022 — حتى الآن', 'exp-drovox-type': 'دوام كامل', 'exp-drovox-role': 'مطوّر iOS أول',
