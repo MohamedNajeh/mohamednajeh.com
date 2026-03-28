@@ -2,7 +2,7 @@
 <html class="dark" lang="en">
 <head>
 <meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
 <title>Mohamed Najeh | Senior iOS Engineer</title>
 
 <!-- ── SEO ── -->
@@ -276,6 +276,12 @@
   /* ── Material icons weight ── */
   .material-symbols-outlined {
     font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+  }
+
+  /* ── Prevent horizontal overflow ── */
+  html, body {
+    overflow-x: hidden;
+    max-width: 100%;
   }
 
   /* ── Scrollbar ── */
